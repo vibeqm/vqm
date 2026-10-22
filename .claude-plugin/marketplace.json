@@ -12,7 +12,7 @@
       "name": "vibeqm",
       "source": "./plugins/vibeqm",
       "description": "Skills over vibeqm-check: assess a repository against the Vibe Quality Model, create the Level 2 files, close open gates one at a time, and answer the assessor's judgment questions",
-      "version": "0.1.0"
+      "version": "0.1.1"
     }
   ]
 }

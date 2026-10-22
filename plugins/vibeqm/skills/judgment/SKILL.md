@@ -32,7 +32,7 @@ whose facts are met, with reasons a person can check.
 
 ## Steps
 
-1. From the repository root, run `npx --yes vibeqm-check@0.4.2 --json` and note the
+1. From the repository root, run `npx --yes vibeqm-check@0.4.3 --json` and note the
    level reached, the next level, and which gates are `met`.
 2. Take the questions below for the gates that are met, at the reached and the next
    level. Skip a gate whose facts are not met: its judgment can't help it yet.

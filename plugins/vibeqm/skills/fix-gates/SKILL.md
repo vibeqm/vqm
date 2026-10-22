@@ -33,7 +33,7 @@ through them with the person, one gate at a time.
 1. From the repository root, run:
 
    ```bash
-   npx --yes vibeqm-check@0.4.2 --json
+   npx --yes vibeqm-check@0.4.3 --json
    ```
 
 2. Take the open gates (`status` not `met`) of the **next** level only (`next` in
