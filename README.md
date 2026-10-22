@@ -10,7 +10,7 @@ holds the material that goes with it. Start at [vibeqm.com](https://vibeqm.com).
 | The assessor procedure an AI agent follows (also at [vibeqm.com/assessor](https://vibeqm.com/assessor)) | [`framework/ASSESSOR.md`](framework/ASSESSOR.md) |
 | The documentation standard: which records, where | [`framework/DOC_STANDARD.md`](framework/DOC_STANDARD.md) |
 | Templates for the records each level asks for | [`templates/`](templates/) |
-| The self-assessment tool | [`vqm-check`](https://www.npmjs.com/package/vqm-check): run `npx vqm-check` in your repository |
+| The self-assessment tool | [`vibeqm-check`](https://www.npmjs.com/package/vibeqm-check): run `npx vibeqm-check` in your repository |
 
 More arrives here as it is published, starting with the current setup for each
 coding agent.
