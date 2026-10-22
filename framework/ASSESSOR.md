@@ -160,7 +160,7 @@ Autonomy earned: <the Level N row of VQM_SPEC.md §3>
 
 ## 4. The scripted half
 
-The fact checks in §2 that a script can prove are built into `vqm-check`, a free
-command-line tool and GitHub Action ([npm](https://www.npmjs.com/package/vqm-check)). It
+The fact checks in §2 that a script can prove are built into `vibeqm-check`, a free
+command-line tool and GitHub Action ([npm](https://www.npmjs.com/package/vibeqm-check)). It
 reads the repository, changes nothing, and hands the judgment questions back to
 the agent or the person running it. Without it, the agent runs the checks itself.

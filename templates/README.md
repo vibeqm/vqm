@@ -9,7 +9,7 @@ placeholders is not evidence of anything.
 
 Copy the contents of `level-2/` into the root of your repository, then fill the
 placeholders. The table says what each file is for and the check that keeps it
-honest. The gate names are the ones `vqm-check` reports.
+honest. The gate names are the ones `vibeqm-check` reports.
 
 | File | Gate it serves | The check that keeps it honest |
 |:--|:--|:--|
@@ -25,7 +25,7 @@ honest. The gate names are the ones `vqm-check` reports.
 | `VibeQM/decisions/DECISIONS.md` | Decision log (light) | Every decision is dated and names who decided |
 | `VibeQM/plan/PROJECT_PLAN.md` | Plan (light) | Every milestone says what evidence closes it |
 | `VibeQM/tailoring/TAILORING.md` | Version control + merge path (the solo-work exception) | Every change to the standard has a reason and an approver |
-| `vqm-proof.json` | Proof for what `vqm-check` can't see | Each entry is vouched for by a named person, and expires after a year |
+| `vqm-proof.json` | Proof for what `vibeqm-check` can't see | Each entry is vouched for by a named person, and expires after a year |
 
 ## What files can't do
 
@@ -47,5 +47,5 @@ Level 2 also needs a few things no template can supply:
 - **Small changes**: a median of 400 changed lines or fewer per commit on the main
   branch.
 
-Run `npx vqm-check` in your repository to see which gates are open and what each
+Run `npx vibeqm-check` in your repository to see which gates are open and what each
 one needs.

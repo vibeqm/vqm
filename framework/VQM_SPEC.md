@@ -468,7 +468,7 @@ Model.
   the framework version it was assessed against. A VibeQM level is never
   presented as equivalent to a level in any other model. It may add a progress profile for the next
   level: "VibeQM v0.4.4 self-assessed: Level 2, DATE, ASSESSOR; Level 3: 20 of 25 items
-  open". Where vqm-check runs on every push or on a schedule, it may add
+  open". Where vibeqm-check runs on every push or on a schedule, it may add
   "last checked DATE" from its latest passing run. That date says when the
   fact checks last passed; it never makes the claim continuously valid, because the
   fact checks cover only part of the gates.
