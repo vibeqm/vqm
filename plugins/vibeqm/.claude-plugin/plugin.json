@@ -1,0 +1,13 @@
+{
+  "name": "vibeqm",
+  "version": "0.1.0",
+  "description": "The Vibe Quality Model (VibeQM) for Claude Code: skills over vibeqm-check that assess a repository, create the Level 2 files, close open gates one at a time, and answer the assessor's judgment questions. Self-assessment, performed by AI; read-only unless you say yes.",
+  "author": {
+    "name": "Eduardo Sanchez",
+    "url": "https://vibeqm.com"
+  },
+  "homepage": "https://vibeqm.com",
+  "repository": "https://github.com/vibeqm/vqm",
+  "license": "MIT",
+  "keywords": ["vibe-quality-model", "vibeqm", "ai-coding", "code-quality", "self-assessment", "maturity-model"]
+}
