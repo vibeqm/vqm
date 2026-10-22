@@ -35,7 +35,15 @@ Install it in Claude Code:
 `/plugin install vibeqm --marketplace vibeqm/vqm`.)
 
 The skills read your repository and change nothing until you say yes; they never
-commit or push unless you ask. They are plain `SKILL.md` folders, so any agent that
+commit or push unless you ask.
+
+**What leaves your machine.** Nothing goes to us: no account, no telemetry, no server
+of ours. Two outside calls are made on your side: `npx` downloads `vibeqm-check` from
+the npm registry, and, if the GitHub CLI (`gh`) is logged in, `vibeqm-check` asks
+GitHub, read-only and with your own login, for the repository's CI runs and merged
+pull requests (`--offline` turns that off). The checks read your git history,
+including commit authors' names and emails, on your machine. See
+[`PRIVACY.md`](PRIVACY.md). They are plain `SKILL.md` folders, so any agent that
 reads skills can use them: copy the folders in
 [`plugins/vibeqm/skills/`](plugins/vibeqm/skills/) into that agent's skills folder.
 
