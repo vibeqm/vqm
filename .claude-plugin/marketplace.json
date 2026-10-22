@@ -1,0 +1,18 @@
+{
+  "name": "vibeqm",
+  "owner": {
+    "name": "Eduardo Sanchez",
+    "url": "https://vibeqm.com"
+  },
+  "metadata": {
+    "description": "The Vibe Quality Model (VibeQM) for Claude Code: self-assess a repository and close its open gates"
+  },
+  "plugins": [
+    {
+      "name": "vibeqm",
+      "source": "./plugins/vibeqm",
+      "description": "Skills over vibeqm-check: assess a repository against the Vibe Quality Model, create the Level 2 files, close open gates one at a time, and answer the assessor's judgment questions",
+      "version": "0.1.0"
+    }
+  ]
+}
