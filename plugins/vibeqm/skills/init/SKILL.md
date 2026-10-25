@@ -27,7 +27,7 @@ without `--yes`: that is how the person gets to see the list before you write.
 2. Get the list, writing nothing:
 
    ```bash
-   npx --yes vibeqm-check@0.4.3 init < /dev/null
+   npx --yes vibeqm-check@0.4.4 init < /dev/null
    ```
 
    It prints "Will create:" and the files, then says nothing was written.
@@ -49,7 +49,7 @@ without `--yes`: that is how the person gets to see the list before you write.
 4. On a yes, create them:
 
    ```bash
-   npx --yes vibeqm-check@0.4.3 init --yes
+   npx --yes vibeqm-check@0.4.4 init --yes
    ```
 
 5. Fill the blanks. List the `<...>` blanks left in the new files. Fill those the
@@ -59,6 +59,6 @@ without `--yes`: that is how the person gets to see the list before you write.
    until they're filled.
 6. Check `.github/workflows/checks.yml` runs this project's real test and lint
    commands; adjust it to them, and say so.
-7. Run the **assess** skill (or `npx --yes vibeqm-check@0.4.3`) and report which
+7. Run the **assess** skill (or `npx --yes vibeqm-check@0.4.4`) and report which
    gates the new files closed and which are still open. Remind the person that the
    files count once they're committed, and that committing is their call.

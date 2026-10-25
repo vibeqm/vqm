@@ -38,7 +38,7 @@ runs it and explains the answer.
 2. Run the checks as JSON:
 
    ```bash
-   npx --yes vibeqm-check@0.4.3 --json
+   npx --yes vibeqm-check@0.4.4 --json
    ```
 
    It needs Node.js 20 or later and git. If the GitHub CLI (`gh`) is logged in, the

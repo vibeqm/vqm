@@ -1,7 +1,7 @@
 {
   "name": "vibeqm",
   "displayName": "VibeQM",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "The Vibe Quality Model (VibeQM) for Claude Code: skills over vibeqm-check that assess a repository, create the Level 2 files, close open gates one at a time, and answer the assessor's judgment questions. Self-assessment, performed by AI; read-only unless you say yes.",
   "author": {
     "name": "Eduardo Sanchez",
