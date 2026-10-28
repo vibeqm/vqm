@@ -1,6 +1,6 @@
-# VibeQM assessor procedure v0.4.4
+# VibeQM assessor procedure v0.4.5
 
-Version 0.4.4, 2026-10-17. Part of the Vibe Quality Model: [vibeqm.com](https://vibeqm.com).
+Version 0.4.5, 2026-10-27. Part of the Vibe Quality Model: [vibeqm.com](https://vibeqm.com).
 
 The Vibe Quality Model is assessed by AI. This file is the assessor: a procedure
 that any capable coding agent (Claude Code, Codex, Gemini CLI, Copilot agent…)
@@ -51,7 +51,8 @@ Give the agent this instruction from the repository root:
     repositories, and list them. A standard kept in another repository is read
     there. Level 2 is claimed per repository; a claim of Level 3 or above
     covers a team or organization, and each listed repository must meet the lower
-    levels.
+    levels. A solo developer is a team of one and claims Level 3 and above
+    for the repositories they list.
 11. **Check the records are still there.** The records an assessment relies on are
     kept as long as its result is valid, where a rebase or a CI log expiry can't
     erase them. A record the report cites that has gone makes its item
@@ -118,7 +119,7 @@ Give the agent this instruction from the repository root:
 | 3 | Release management | Versioned releases with changelog and release notes; a recorded rollback drill | — |
 | 3 | Operations | Monitoring, logging and alerting configured; incident response defined; a blameless postmortem for each incident; a backup restore tested | — |
 | 3 | Training | A record of the team's training on the standard and the AI tools | — |
-| 4 Measured | Metrics with baselines | The four VibeQM numbers and DORA's four (deployment frequency, lead time, change failure rate, time to restore), dependency freshness and service-level objectives, as defined in [the specification](VQM_SPEC.md) §8, tracked with a baseline for each model version and the warm-up rule, which ends at 90 days at the latest | — |
+| 4 Measured | Metrics with baselines | The four VibeQM numbers and DORA's four (deployment frequency, lead time, change failure rate, time to restore), dependency freshness and service-level objectives, as defined in [the specification](VQM_SPEC.md) §8, tracked with a baseline for each model family, the warm-up rule at a change of family (ending at 90 days at the latest) and a recorded revalidation at each version change inside the family | — |
 | 4 | Limits and action | Limits set; at least one recorded process change linked to the metric that triggered it (commit or decision) | — |
 | 4 | Automatic stop | A hook runs before every self-merge, checks the change (size, deleted or weakened tests, re-sorted risk class, reviewer verdict, security scan) and the numbers readable that day (escaped defects and reverts over 30 days), and cuts self-merging off at a breach; it clears when the numbers recover or a named person records an override with a lessons entry; monthly numbers stop it from the monthly review, with the window disclosed. History or a test shows it firing | — |
 | 4 | Outside signal | One signal of quality written by people outside the team is tracked with its source and baseline; a worsening has a person's recorded explanation | Is it really from outside the team, or a team-recorded number? |
@@ -137,10 +138,10 @@ Give the agent this instruction from the repository root:
 ```markdown
 # VibeQM assessment — <repo or team> — <date>
 Assessed by AI (<model and version>) against VibeQM v<framework version>, following ASSESSOR.md v<its version>.
-Covers: <repositories>. Valid until: <one year, or the next change of main model>.
+Covers: <repositories>. Valid until: <one year, or the next change of main model family>.
 Countersigned by <name>, <date>. Second report: <file>; agreement (recorded by the
 countersigner): <yes / no, gates that differ>.
-**Result: Level N — <name>**
+**Result: Level N — <name>**; Level N+1: <open> of <total> items open
 Autonomy earned: <the Level N row of VQM_SPEC.md §3>
 
 | Level | Gate | Status | Evidence |
