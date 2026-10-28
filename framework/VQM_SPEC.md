@@ -1,6 +1,6 @@
-# The Vibe Quality Model (VibeQM): specification v0.4.4
+# The Vibe Quality Model (VibeQM): specification v0.4.5
 
-Version 0.4.4, 2026-10-17. Part of the Vibe Quality Model: [vibeqm.com](https://vibeqm.com).
+Version 0.4.5, 2026-10-27. Part of the Vibe Quality Model: [vibeqm.com](https://vibeqm.com).
 
 The definition of the model: the five levels, the autonomy each one earns, the
 evidence rules and what each level requires. The assessor procedure
@@ -31,7 +31,7 @@ AI's work is guarded by the team's process. No slang.
 | 1 | **Unguided** | Prompt, accept, ship what runs. Quality depends on luck and on one person's attention | None. Everyone starts here |
 | 2 | **Guarded** | Every project has the basics: written requirements, a rules file, version control, peer review, verification and a security review on every change, development kept apart from production, limited agent permissions, and a human owner for every change | Every item of §6 Level 2 is met, with evidence |
 | 3 | **Standardized** | One shared standard across projects, enforced by the system and audited: managed and traceable requirements with diagrams, risk-based peer review, verification and validation before every deployment through at least three environments, current platforms and dependencies, release, incident and backup practices, pinned models, provenance, a lessons log, training | Every item of §6 Level 3 is met, with evidence, and an audit shows the standard is followed |
-| 4 | **Measured** | The four VibeQM numbers, DORA's four delivery metrics and one signal from outside the team are tracked against limits, with baselines for each model version; service-level objectives hold in production; low-risk self-merging is checked before every merge and stops automatically at a breach | Every item of §6 Level 4 is met, with a history of acting on the numbers |
+| 4 | **Measured** | The four VibeQM numbers, DORA's four delivery metrics and one signal from outside the team are tracked against limits, with baselines for each model family; service-level objectives hold in production; low-risk self-merging is checked before every merge and stops automatically at a breach | Every item of §6 Level 4 is met, with a history of acting on the numbers |
 | 5 | **Self-Improving** | Every escaped defect and incident gets a root-cause analysis and becomes a new rule, check, skill or permission; improvements and new tools are tried against the numbers before adoption | Every item of §6 Level 5 is met; each lessons entry links to the change it made |
 
 The gate column summarizes. §6 lists every required artifact and practice, and
@@ -40,7 +40,9 @@ The gate column summarizes. §6 lists every required artifact and practice, and
 **The unit of a claim**. Level 2 is claimed for one repository. Level 3 and
 above are claimed for a team or an organization: the claim lists its repositories,
 each of which meets the lower levels, and the shared standard is read in the
-repository that owns it.
+repository that owns it. A solo developer is a team of one: they claim Level 3 and
+above for the repositories they list (one is enough), and the standard lives in one of
+them.
 
 **Staged rule.** A level is claimed only when every lower level is also met. A team
 with a lessons loop (5) but no measurements (4) is at Level 3.
@@ -106,8 +108,9 @@ is examples; the test decides.
    permissions block. Each names the change it covers by its hash. The same
    applies from Level 3 to the reviewer's planted-fault record (§7).
 2. **A check counts only after it has been seen to fail.** For automated checks:
-   a planted fault or mutation testing, with a record. For process gates that can't
-   be triggered on cue: one real change the gate stopped or corrected.
+   a planted fault or mutation testing, with a record; at Level 2, a real failure
+   that blocked a change and was then fixed counts too. For process gates
+   that can't be triggered on cue: one real change the gate stopped or corrected.
 3. **Peer review must be independent**. Two kinds count:
    - **Human peer review:** a person other than the change's author reviews it.
    - **AI peer review:** a model from a **different company** than the one that
@@ -123,7 +126,7 @@ is examples; the test decides.
 
 | Class | Examples | Minimum before it lands |
 |:--|:--|:--|
-| Low | Documentation, comments, styling, new tests that leave existing tests unchanged | Automated checks |
+| Low | Documentation, comments, styling, new tests that leave existing tests unchanged | Automated checks, plus the level's peer review (every change gets one from Level 2); the class is what makes a change eligible for the AI's self-merge at Level 4 |
 | Standard | Everything not listed as low or high | Automated checks, plus a human **or** AI peer review |
 | High | Login and permissions, payments, personal data, deleting data, security settings, deployment and infrastructure, new dependencies and agent plug-ins, the AI's own rules and permissions, any change that weakens or deletes a test | Automated checks plus a peer review (Level 2); from Level 3, a human **and** an AI peer review plus a threat model |
 
@@ -159,8 +162,9 @@ Nothing is required.
 
 - A rules file specific to the repository, and a README.
 - Written requirements with acceptance criteria (an issue tracker, or a short file);
-  an issue tracker or backlog, so every change traces to a request.
-- Short versions of the decision log and the plan.
+  an issue tracker or backlog, so every change traces to a request. (The decision log
+  and the plan are Level 3 artifacts, ; the Level 2 templates create short
+  versions as a head start.)
 - Version control with branches; tagged releases.
 - Dependency manifests with lockfiles.
 - CI configuration with blocking checks; linter, formatter and test-suite
@@ -281,13 +285,14 @@ Nothing is required.
   issues or customer acceptance results (for a book, reader errata and returns), with
   its source and a baseline. Incidents the team records itself don't count, and it is
   never a quality score the team computes.
-- Baselines for each model version, limits, the warm-up record for the last model
-  switch, the automatic-stop check, and records linking numbers to process changes.
+- Baselines for each model family, limits, the warm-up or revalidation record for the
+  last model switch, the automatic-stop check, and records linking numbers to process changes.
 
 **Practices**
 
 - The numbers are reviewed monthly, where the limits are set and recalibrated;
-  baselines restart when the model changes, with the warm-up rule (§7).
+  baselines restart when the model family changes, with the warm-up rule, and are
+  revalidated at a version change (§7).
 - The automatic stop is checked before every self-merge and cuts off self-merging
   at a breach (§7).
 - Process decisions are made from the data, and at least one recorded process change
@@ -340,13 +345,21 @@ From Level 3:
 
 From Level 4:
 
-- Baselines belong to a model version. When the model or its version changes, the
-  baselines restart, and numbers from different models are not mixed.
-- **Warm-up after a model change**: until the new baseline has 50 merged
+- Baselines belong to a model family (was a model version): the models one
+  company offers under one name, such as Claude, GPT or Gemini. When the family
+  changes, the baselines restart, and numbers from different families are not mixed.
+- **Warm-up after a change of family**: until the new baseline has 50 merged
   changes or 30 days of data, whichever comes later, the previous limits apply,
   each moved 20% toward stricter (an escaped-defect limit of 10 becomes 8; a
   review-yield floor of 10% becomes 12%). The warm-up ends at 90 days at the latest;
   a thinner baseline is then accepted and noted in the report.
+- **Revalidation after a version change inside the family**: the baseline
+  continues, but the next 20 merged changes run under the warm-up limits (the current
+  limits moved 20% toward stricter). If the numbers hold, the baseline carries on and
+  the version change is noted in it; if a limit is crossed, the baseline restarts
+  with the full warm-up. The revalidation is recorded like a warm-up. Frontier models
+  change version every few months, so a restart at every version would keep a team
+  in warm-up for most of the year.
 - **The self-merge stop (§3) is checked at every merge**. Before each
   self-merge, a hook checks the change (its size, deleted or weakened tests, the
   re-sorted risk class, the reviewer's verdict, the security scan) and the numbers
@@ -356,8 +369,9 @@ From Level 4:
   Numbers that only mean something over a month (DORA's, service-level objectives)
   are read at the monthly review: a breach found there stops self-merging from that
   date, and the report discloses the window in between.
-- A change of the AI peer reviewer's model or version restarts the baselines that
-  depend on review (review yield, the self-merge reviews), with the warm-up rule.
+- A change of the AI peer reviewer's model family restarts the baselines that
+  depend on review (review yield, the self-merge reviews), with the warm-up rule; a
+  version change inside its family revalidates them.
 
 ## 8. The Level 4 numbers
 
@@ -376,8 +390,8 @@ From Level 4:
 | Dependency freshness | Patch latency against the update policy (§10), and versions behind current | Software inventory, update tool |
 | Service-level objectives | Agreed targets for availability, latency or errors in production, and their measurement | Monitoring |
 
-Each number has a written definition, a source, a baseline for each model version,
-and a limit. A merged change, in the per-100 counts, is a commit on the main branch,
+Each number has a written definition, a source, a baseline for each model family
+(§7), and a limit. A merged change, in the per-100 counts, is a commit on the main branch,
 merge commits left out, as in §6 Level 2. A project may tailor a definition with a record.
 
 **The numbers are diagnostics, not targets**. A number that becomes a
@@ -466,9 +480,11 @@ Model.
   still missing for the next level.
 - A scorecard reads **"VibeQM vX.Y.Z self-assessed: Level N, DATE, ASSESSOR"**, naming
   the framework version it was assessed against. A VibeQM level is never
-  presented as equivalent to a level in any other model. It may add a progress profile for the next
-  level: "VibeQM v0.4.4 self-assessed: Level 2, DATE, ASSESSOR; Level 3: 20 of 25 items
-  open". Where vibeqm-check runs on every push or on a schedule, it may add
+  presented as equivalent to a level in any other model. It adds a progress profile for the next
+  level once Level 2 is met: "VibeQM v0.4.5 self-assessed: Level 2, DATE, ASSESSOR;
+  Level 3: 20 of 27 items open". The profile leads the result on the tool's
+  screen and on the site: Level 3 has about twice the gates of Level 2, and most
+  teams spend a long time inside it, so progress through it is shown, not hidden. Where vibeqm-check runs on every push or on a schedule, it may add
   "last checked DATE" from its latest passing run. That date says when the
   fact checks last passed; it never makes the claim continuously valid, because the
   fact checks cover only part of the gates.
@@ -480,7 +496,7 @@ Model.
 - A named person countersigns every report and records whether the two agree.
 - Reports state what they cover and which checks the assessor could not see; those
   stay unmet until proof is supplied.
-- A result is valid for one year, or until the team changes the model version it
+- A result is valid for one year, or until the team changes the model family it
   uses for the main work.
 - The records an assessment relies on are kept at least as long as its result is
   valid, somewhere a rebase, a squash or a CI log expiry can't erase them.
