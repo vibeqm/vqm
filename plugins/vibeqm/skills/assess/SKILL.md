@@ -47,17 +47,28 @@ runs it and explains the answer.
    VibeQM.
 3. Read the JSON: `level` (reached), `next`, `open` (gates still open), `proof` (the
    `vqm-proof.json` files read), and `results`, one per gate with `level`, `gate`,
-   `status` (`met`, `not-met`, `not-visible`) and `evidence`; open gates carry `fix`
-   (`why`, `steps`, `verify`, `minutes`).
+   `status` (`met`, `not-met`, `not-visible`, `in-place`) and `evidence`; an
+   `in-place` gate carries `progress` (`done`, `needed`, `unit`); open gates carry
+   `fix` (`why`, `steps`, `verify`, `minutes`, and `needs`: `agent`, `answer`, `host`
+   or `use`).
 4. Tell the person, in this order and briefly:
-   - the level reached and its name, and the next level and its name, both from the
-     table above (`level` 1 is Unguided: no level's gates are met yet);
-   - the open gates of the next level, each with one line of evidence and its minutes,
+   - how far the next level is: the open gates of the next level counted, how many
+     you can do alone (`needs` is `agent`) and how many need an answer from them, a
+     setting on the code host, or use; then what is already met;
+   - today's level and its name, the next level and its name, both from the table
+     above (`level` 1 is Unguided: no level's gates are met yet), and what the next
+     level earns (Level 2: the AI edits on its own branch and runs the checks while
+     the person supervises; Level 3: a task from an issue to a pull request on its own);
+   - the open gates, each with one line of evidence, its minutes and who it needs,
      cheapest first, with the total;
-   - gates marked **not visible**: the tool can't see them from here (branch
-     protection, host settings); say what proof would show them;
+   - gates marked **in place**: set up and counting with use; give the count
+     ("peer review counts after 20 reviewed pushes, 3 so far");
+   - gates marked **not visible**: the tool can't see them from here (host settings);
+     say what proof would show them, or that the tool reads branch rules when the
+     GitHub CLI is logged in;
    - anything quoted under the rules above.
-   Leave Level 3 gates out unless Level 2 is reached or the person asks.
+   Leave Level 3 gates out unless Level 2 is reached or the person asks. Never
+   round "in place" or "not visible" up to met.
 5. Offer the next step, without starting it:
    - no rules file, no `VibeQM/` folder, few Level 2 records: the **init** skill
      creates the Level 2 template files after the person agrees;

@@ -37,22 +37,31 @@ through them with the person, one gate at a time.
    ```
 
 2. Take the open gates (`status` not `met`) of the **next** level only (`next` in
-   the JSON). List them with their minutes and one line of evidence each. Recommend an
-   order: gates other gates depend on first (a rules file, then checks before merge),
-   then the cheapest. Let the person pick.
+   the JSON). List them with their minutes, who each needs (`fix.needs`: `agent`,
+   `answer`, `host` or `use`) and one line of evidence each. Recommend an order:
+   gates other gates depend on first (a rules file, then checks before merge), then
+   the cheapest. Let the person pick. A gate marked `in-place` is set up already and
+   counts with use: say its count and leave it.
+   If the person has another repository already set up with vibeqm-check, offer to
+   copy its hooks, CI workflow, agent settings and templates and rewrite only this
+   repository's facts: the second repository should cost minutes, not hours.
 3. For the chosen gate:
    - say why it matters, in a sentence, from `fix.why`;
    - read the files the steps touch, so the work fits this repository as it is;
    - propose the change and wait for a yes;
-   - do it, following `fix.steps`;
+   - do it, following `fix.steps`. Do every gate you can alone before asking the
+     person for anything; then ask for what you need in one message (what is live,
+     the requirements to confirm, the review route, starting with whether this code
+     may leave the machine); never interrupt twice for the same gate;
    - confirm it the way `fix.verify` says (usually: run the tool again and read that
      gate).
 4. Report: the gate's new status with its evidence, what's left at this level and
    its total minutes. Then offer the next gate.
 5. Some gates need time or other people, and can't close in one session: "Checks seen
-   to fail" needs a check that really blocked a change; "Peer review on every change"
-   counts once 20 changes have followed its adoption. Set up what makes them happen,
-   and say when the gate can close.
+   to fail" needs a check that really blocked a change, or a planted-fault drill you
+   run and record; "Peer review on every change" reads in place once review runs and
+   counts after 20 reviewed pushes. Set up what makes them happen, and say when the
+   gate can close.
 6. When every fact check of the level is met, offer the **judgment** skill: the
    assessor's judgment questions decide whether the evidence is real practice or only
    paperwork.
