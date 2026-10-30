@@ -5,10 +5,12 @@ description: Create the Vibe Quality Model (VibeQM) Level 2 template files in th
 
 # Create the Level 2 files
 
-`vibeqm-check init` copies the VibeQM Level 2 templates into a repository. It lists
-the files first, skips any that already exist, never overwrites, never commits and
-installs no hook. In an agent's shell it is not in a terminal, so it writes nothing
-without `--yes`: that is how the person gets to see the list before you write.
+`vibeqm-check init` copies the VibeQM Level 2 templates into a repository, filling
+the blanks the repository answers (the test and build commands, the description). It
+lists the files first, skips any that already exist, never overwrites, never commits
+and enables no hook (it writes `.githooks/pre-commit`; enabling it is one command).
+In an agent's shell it is not in a terminal, so it writes nothing without `--yes`:
+that is how the person gets to see the list before you write.
 
 ## Rules
 
@@ -35,6 +37,8 @@ without `--yes`: that is how the person gets to see the list before you write.
    - `AGENTS.md`: the rules file agents read at the start of every session;
    - `.claude/settings.json`: the agent's permissions (no force-push, no skipped
      checks, no reading of secret files, ask before publishing);
+   - `.githooks/pre-commit`: the blocking check before every commit, enabled once per
+     clone with `git config core.hooksPath .githooks` (ask before running it);
    - `.github/workflows/checks.yml`, `.github/dependabot.yml`: checks on every pull
      request, and dependency updates;
    - `.github/pull_request_template.md`, `.github/ISSUE_TEMPLATE/change-request.md`:
@@ -52,9 +56,13 @@ without `--yes`: that is how the person gets to see the list before you write.
    npx --yes vibeqm-check@0.4.4 init --yes
    ```
 
-5. Fill the blanks. List the `<...>` blanks left in the new files. Fill those the
-   repository answers (build and test commands, language, CI steps), show the person
-   what you filled, and ask them for the rest (owner, environments, what is live).
+5. Fill the blanks. List the `<...>` blanks left in the new files (init filled the
+   test and build commands and the description when the repository had them). Fill
+   those the repository answers (language, folders, CI steps), show the person what
+   you filled, and ask them for the rest in one message (owner, environments, what is
+   live). For a one-person repository, offer to fill the tailoring row the template
+   shows, which with the hook and the deny rules is the accepted equivalent of pull
+   requests.
    A template still holding blanks is not evidence, so the gates it serves stay open
    until they're filled.
 6. Check `.github/workflows/checks.yml` runs this project's real test and lint

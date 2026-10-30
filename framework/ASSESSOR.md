@@ -1,6 +1,6 @@
-# VibeQM assessor procedure v0.4.5
+# VibeQM assessor procedure v0.4.6
 
-Version 0.4.5, 2026-10-27. Part of the Vibe Quality Model: [vibeqm.com](https://vibeqm.com).
+Version 0.4.6, 2026-10-30. Part of the Vibe Quality Model: [vibeqm.com](https://vibeqm.com).
 
 The Vibe Quality Model is assessed by AI. This file is the assessor: a procedure
 that any capable coding agent (Claude Code, Codex, Gemini CLI, Copilot agent…)
@@ -38,6 +38,9 @@ Give the agent this instruction from the repository root:
 6. **No benefit of the doubt.** "Partly" is not met. Unknown is not met. A gate you
    cannot see (private CI settings, branch protection, production access) is marked
    **not visible** and stays unmet until the countersigner attaches proof.
+   A gate whose practice is set up and recorded but measured over use is marked
+   **in place**, with how far along it is ("3 of 20 reviewed changes"); it is not
+   met until the use has happened.
 7. **Say what would change the result.** For the first unmet level, list the exact
    evidence missing.
 8. **Two models, independently.** Two AI models from different companies
@@ -80,18 +83,18 @@ Give the agent this instruction from the repository root:
 | Level | Gate | Fact checks (deterministic) | Judgment (with reasons) |
 |:--|:--|:--|:--|
 | 2 Guarded | Agent rules file | A rules file exists and says what the agent may change and how to verify | Is it specific to this repo, or boilerplate? |
-| 2 | Version control + merge path | Default branch protected, or merges go through PRs (history shows merge/PR commits) | — |
+| 2 | Version control + merge path | Default branch protected, or merges go through PRs (history shows merge/PR commits); or, for one author, the accepted equivalent: a committed blocking hook, `--no-verify` denied in committed agent settings, and a tailoring row recording it | — |
 | 2 | Checks before merge | CI runs tests on PRs; failing checks block merge (required checks or equivalent) | — |
 | 2 | Small batches | Median changed lines per change in the sample is 400 or fewer (a change is a commit on the main branch, merge commits left out), or within a limit the standard states (report the number); every high-risk change in the sample is within that limit | — |
 | 2 | Agent permissions | Settings limit what the agent can run and reach: no force-push, no skipped checks, no deletes outside the project, no reading of secret files (production credentials kept from the agent are Level 3); actions the team can't undo with a practiced rollback need a person's approval when they happen ([the specification](VQM_SPEC.md) §3) | Are the limits real, or wide open? Do the ask rules cover every action this project can't undo (publishing a package, sending messages, spending money, credentials)? |
 | 2 | Owner per change | Every change in the sample names a human owner (author, assignee or approver), including changes the AI merged itself | — |
 | 2 | Checks seen to fail | Automated checks: history shows one blocking a merge (a failed CI run followed by a fix counts), or a recorded planted fault it caught. Process gates: one real change they stopped or corrected ([the specification](VQM_SPEC.md) §4 rule 2) | — |
 | 2 | Requirements first | Sampled changes trace to a written requirement or issue with acceptance criteria; where a requirement was ambiguous, the clarifying questions (multiple options, recommendation first) and the answer are recorded | Are the acceptance criteria testable? |
-| 2 | Peer review on every change | Every sampled change is covered by a human peer review or an AI peer review by a model from a different company, in a separate session ([the specification](VQM_SPEC.md) §4 rule 3). The review is due at the push or pull request and covers every commit since the last reviewed one; commits not pushed yet are not counted, and nothing reaches staging or production unreviewed. A team that adopts review later is sampled from its adoption date, once at least 20 changes have followed it; earlier history is not claimed as reviewed. A review record written by a push hook with a passing verdict, naming the commit range, counts on its own when the reviewer is from a different company | Did anything reach staging or production before its review? |
+| 2 | Peer review on every change | Every sampled change is covered by a human peer review or an AI peer review by a model from a different company, in a separate session ([the specification](VQM_SPEC.md) §4 rule 3). The review is due at the push or pull request and covers every commit since the last reviewed one; commits not pushed yet are not counted, and nothing reaches staging or production unreviewed. A team that adopts review later is sampled from its adoption date, once at least 20 changes have followed it; earlier history is not claimed as reviewed. A review record written by a push hook with a passing verdict, naming the commit range, counts on its own when the reviewer is from a different company. Until 20 changes have followed adoption, with every one reviewed, the gate is **in place**: reported with the count, not met | Did anything reach staging or production before its review? |
 | 2 | Verification on every change | Tests, linter and static analysis run on every change and a failure blocks it | — |
 | 2 | Security review before push | An AI security review (e.g. `/security-review`) runs before every push or pull request; secret scanning configured; dependency vulnerability scan blocks on critical findings | — |
 | 2 | Development apart from production | The repository names a development and a production environment (in the rules file, the README or a note, or shown by config files), or says nothing is live yet; and the agent publishes live only after the person confirms (a rule in the rules file, or an ask or deny rule on publish commands). A testing or staging environment is recommended, not required | Does the rule cover the commands this project really publishes with? |
-| 2 | Configuration basics | Releases are tagged; dependency manifests have lockfiles; no secrets in the repository | — |
+| 2 | Configuration basics | Releases are tagged (until the first release, the rules file or README says nothing is released yet); dependency manifests have lockfiles; no secrets in the repository | — |
 | 3 Standardized | One written standard | `VibeQM/` (or equivalent) holds a standard: rules, review checklist, definition of done | Would two projects following it end up working the same way? |
 | 3 | Standard is followed | An audit/check exists that can fail (script, CI job, review checklist enforced), and has run at least monthly or at the cadence the standard states | In the sample, how many changes show the standard applied? |
 | 3 | Provenance | A record of the model and version that wrote, and the model that reviewed, each significant change (PR template field, commit trailer, log) | Is it filled in practice, not just in the template? |
@@ -138,10 +141,10 @@ Give the agent this instruction from the repository root:
 ```markdown
 # VibeQM assessment — <repo or team> — <date>
 Assessed by AI (<model and version>) against VibeQM v<framework version>, following ASSESSOR.md v<its version>.
-Covers: <repositories>. Valid until: <one year, or the next change of main model family>.
+Covers: <repositories>. Valid until: <one year; at Level 4 or 5, also the next change of main model family>.
 Countersigned by <name>, <date>. Second report: <file>; agreement (recorded by the
 countersigner): <yes / no, gates that differ>.
-**Result: Level N — <name>**; Level N+1: <open> of <total> items open
+**Result: Level N — <name>**; Level N+1: <open> of <total> items open (<k> in place, counting with use)
 Autonomy earned: <the Level N row of VQM_SPEC.md §3>
 
 | Level | Gate | Status | Evidence |

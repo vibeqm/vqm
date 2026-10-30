@@ -1,6 +1,6 @@
-# The Vibe Quality Model (VibeQM): specification v0.4.5
+# The Vibe Quality Model (VibeQM): specification v0.4.6
 
-Version 0.4.5, 2026-10-27. Part of the Vibe Quality Model: [vibeqm.com](https://vibeqm.com).
+Version 0.4.6, 2026-10-30. Part of the Vibe Quality Model: [vibeqm.com](https://vibeqm.com).
 
 The definition of the model: the five levels, the autonomy each one earns, the
 evidence rules and what each level requires. The assessor procedure
@@ -165,7 +165,8 @@ Nothing is required.
   an issue tracker or backlog, so every change traces to a request. (The decision log
   and the plan are Level 3 artifacts, ; the Level 2 templates create short
   versions as a head start.)
-- Version control with branches; tagged releases.
+- Version control with branches; tagged releases (until the first release, a note
+  that nothing is released yet).
 - Dependency manifests with lockfiles.
 - CI configuration with blocking checks; linter, formatter and test-suite
   configuration.
@@ -195,8 +196,9 @@ Nothing is required.
   person confirms, in the rules file or, better, in the agent's settings. A testing or
   staging environment is recommended, not required, at this level.
 - The agent works on a branch; changes reach the main branch only through a merge
-  path that can refuse them (pull requests with branch protection, or a written
-  exception for solo work).
+  path that can refuse them: pull requests with branch protection, or, for one
+  person, the accepted equivalent: a committed blocking hook, the bypass
+  (`--no-verify`) denied in the agent's settings, recorded as tailoring.
 - Small changes: median 400 changed lines or fewer, unless the standard states
   another limit. A change is a commit on the main branch, merge commits left out, so
   a squash-merged pull request is one change. A high-risk change (§5) stays within that limit; split it if not.
@@ -481,10 +483,17 @@ Model.
 - A scorecard reads **"VibeQM vX.Y.Z self-assessed: Level N, DATE, ASSESSOR"**, naming
   the framework version it was assessed against. A VibeQM level is never
   presented as equivalent to a level in any other model. It adds a progress profile for the next
-  level once Level 2 is met: "VibeQM v0.4.5 self-assessed: Level 2, DATE, ASSESSOR;
-  Level 3: 20 of 27 items open". The profile leads the result on the tool's
-  screen and on the site: Level 3 has about twice the gates of Level 2, and most
-  teams spend a long time inside it, so progress through it is shown, not hidden. Where vibeqm-check runs on every push or on a schedule, it may add
+  level: "VibeQM v0.4.6 self-assessed: Level 2, DATE, ASSESSOR; Level 3: 20 of 27
+  items open". The profile leads the result at every level, Level 1
+  included, on the tool's screen and on the site: most repositories start at Level
+  1 and most teams spend a long time inside Level 3, so progress is shown, not
+  hidden. The result also says who the open items wait on (the
+  agent alone, an answer from the person, a setting on the code host, or use) and
+  the autonomy the next level earns (§3).
+- **In place**. A gate whose practice is set up and recorded but measured
+  over use (peer review counts after 20 reviewed changes) is reported in
+  place, with how far along it is ("counts after 20 reviewed pushes, 3 so far"). It
+  counts as not met for the level; the result says when it will count. Where vibeqm-check runs on every push or on a schedule, it may add
   "last checked DATE" from its latest passing run. That date says when the
   fact checks last passed; it never makes the claim continuously valid, because the
   fact checks cover only part of the gates.
@@ -496,8 +505,13 @@ Model.
 - A named person countersigns every report and records whether the two agree.
 - Reports state what they cover and which checks the assessor could not see; those
   stay unmet until proof is supplied.
-- A result is valid for one year, or until the team changes the model family it
-  uses for the main work.
+- A result is valid for one year. A Level 4 or 5 result also ends when
+  the team changes the model family it uses for the main work, because the
+  baselines and the performance agreement belong to that family.
+  A Level 2 or 3 result survives the change: no Level 2 gate depends on the model,
+  and Level 3's model-bound gates (Models pinned, Reviewer proven) already re-run at
+  a change; the team reruns the fact checks within two weeks of the switch and
+  updates the rules file if the new agent needs different instructions.
 - The records an assessment relies on are kept at least as long as its result is
   valid, somewhere a rebase, a squash or a CI log expiry can't erase them.
 - The assessor is tested on reference repositories before assessments are offered
