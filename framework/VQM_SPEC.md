@@ -1,6 +1,6 @@
-# The Vibe Quality Model (VibeQM): specification v0.4.6
+# The Vibe Quality Model (VibeQM): specification v0.4.7
 
-Version 0.4.6, 2026-10-30. Part of the Vibe Quality Model: [vibeqm.com](https://vibeqm.com).
+Version 0.4.7, 2026-10-30. Part of the Vibe Quality Model: [vibeqm.com](https://vibeqm.com).
 
 The definition of the model: the five levels, the autonomy each one earns, the
 evidence rules and what each level requires. The assessor procedure
@@ -116,7 +116,8 @@ is examples; the test decides.
    - **AI peer review:** a model from a **different company** than the one that
      wrote the change reviews it, in a separate session.
    A model reviewing its own work is not a peer review. The provenance record names
-   the reviewer.
+   the reviewer. On a team, a person other than the author is always an option; a
+   solo developer's second reader is a model from another company, local or cloud.
 4. **Risk decides the review.** Every change falls in a risk class (§5), and the
    class sets the minimum peer review.
 5. **Traces over documents.** A document proves a standard exists; only traces
@@ -189,8 +190,9 @@ Nothing is required.
 - **Verification on every change.** Tests, linter and static analysis run, and a
   failure blocks the change.
 - **Security review before every push.** An AI security review of the change (for
-  example Claude Code's `/security-review`), secret scanning, and a dependency
-  vulnerability scan that blocks on critical findings.
+  example Claude Code's `/security-review`) or static security analysis of it
+  (CodeQL, Semgrep), secret scanning, and a dependency vulnerability scan
+  that blocks on critical findings.
 - **Development separated from production.** There is a development environment and
   a production environment, and the agent publishes to production only after the
   person confirms, in the rules file or, better, in the agent's settings. A testing or
@@ -492,8 +494,10 @@ Model.
   the autonomy the next level earns (§3).
 - **In place**. A gate whose practice is set up and recorded but measured
   over use (peer review counts after 20 reviewed changes) is reported in
-  place, with how far along it is ("counts after 20 reviewed pushes, 3 so far"). It
-  counts as not met for the level; the result says when it will count. Where vibeqm-check runs on every push or on a schedule, it may add
+  place, with how far along it is ("counts after 20 reviewed changes, 3 so far"). It
+  counts as not met for the level; the result says when it will count. One pushed
+  change without a review restarts the count at the next reviewed change, and the
+  result names the change that broke the run. Where vibeqm-check runs on every push or on a schedule, it may add
   "last checked DATE" from its latest passing run. That date says when the
   fact checks last passed; it never makes the claim continuously valid, because the
   fact checks cover only part of the gates.

@@ -62,7 +62,8 @@ runs it and explains the answer.
    - the open gates, each with one line of evidence, its minutes and who it needs,
      cheapest first, with the total;
    - gates marked **in place**: set up and counting with use; give the count
-     ("peer review counts after 20 reviewed pushes, 3 so far");
+     ("peer review counts after 20 reviewed changes, 3 so far"; one unreviewed push
+     restarts it);
    - gates marked **not visible**: the tool can't see them from here (host settings);
      say what proof would show them, or that the tool reads branch rules when the
      GitHub CLI is logged in;

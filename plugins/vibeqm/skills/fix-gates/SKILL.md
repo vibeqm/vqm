@@ -51,8 +51,11 @@ through them with the person, one gate at a time.
    - propose the change and wait for a yes;
    - do it, following `fix.steps`. Do every gate you can alone before asking the
      person for anything; then ask for what you need in one message (what is live,
-     the requirements to confirm, the review route, starting with whether this code
-     may leave the machine); never interrupt twice for the same gate;
+     the requirements to confirm, the review route as one question with its options:
+     no code leaves this machine, code may leave, a teammate reviews; any record to
+     confirm); show each change before you commit it; never interrupt twice for the
+     same gate. Alone, the person's second reader is a model from another company,
+     local or cloud: a person other than the author is a team's option;
    - confirm it the way `fix.verify` says (usually: run the tool again and read that
      gate).
 4. Report: the gate's new status with its evidence, what's left at this level and
@@ -60,8 +63,8 @@ through them with the person, one gate at a time.
 5. Some gates need time or other people, and can't close in one session: "Checks seen
    to fail" needs a check that really blocked a change, or a planted-fault drill you
    run and record; "Peer review on every change" reads in place once review runs and
-   counts after 20 reviewed pushes. Set up what makes them happen, and say when the
-   gate can close.
+   counts after 20 reviewed changes (one unreviewed push restarts the count, and the
+   hook is per clone). Set up what makes them happen, and say when the gate can close.
 6. When every fact check of the level is met, offer the **judgment** skill: the
    assessor's judgment questions decide whether the evidence is real practice or only
    paperwork.
