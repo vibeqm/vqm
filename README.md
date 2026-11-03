@@ -11,11 +11,11 @@ holds the material that goes with it. Start at [vibeqm.com](https://vibeqm.com).
 | The documentation standard: which records, where | [`framework/DOC_STANDARD.md`](framework/DOC_STANDARD.md) |
 | Templates for the records each level asks for | [`templates/`](templates/) |
 | The self-assessment tool | [`vibeqm-check`](https://www.npmjs.com/package/vibeqm-check): run `npx vibeqm-check` in your repository |
-| Skills for coding agents, and the plugin for Claude Code | [`plugins/vibeqm/`](plugins/vibeqm/) |
+| The plugin for Claude Code and Codex (four skills any agent can read) | [`plugins/vibeqm/`](plugins/vibeqm/) |
 
-## The VibeQM plugin for Claude Code
+## The VibeQM plugin for Claude Code and Codex
 
-Four skills over `vibeqm-check`, so your agent does the practice with you:
+Four skills over `vibeqm-check`, so your agent does the practice with you (in Codex the names are `$assess`, `$init`, `$fix-gates` and `$judgment`):
 
 | Skill | What it does |
 |:--|:--|
@@ -33,6 +33,17 @@ Install it in Claude Code:
 
 (On Claude Code 2.1.275 or later, one line does both:
 `/plugin install vibeqm --marketplace vibeqm/vqm`.)
+
+Install it in Codex (CLI 0.147 or later; the same plugin folder carries a portable
+[Agent Plugins](https://agent-plugins.org) manifest and a Codex catalog):
+
+```
+codex plugin marketplace add vibeqm/vqm
+codex plugin add vibeqm@vibeqm
+```
+
+Neither install needs a directory listing or an account with us: both commands read
+this repository.
 
 The skills read your repository and change nothing until you say yes; they never
 commit or push unless you ask.
