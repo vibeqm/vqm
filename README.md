@@ -59,12 +59,14 @@ The skills are plain `SKILL.md` folders. Copy the four folders in
 
 | Agent | Folder in your repository |
 |:--|:--|
-| OpenCode, Qwen Code, Pi (and Codex, Copilot CLI) | `.agents/skills/` |
+| OpenCode, Qwen Code, Pi, Oh My Pi, DeepSeek Harness (and Codex, Copilot CLI) | `.agents/skills/` |
+| OpenClaw | `.agents/skills/` in its workspace (`agents.defaults.workspace`) |
 | Cline | `.cline/skills/` |
 | Claude Code without the plugin | `.claude/skills/` |
 
-Tested on 2026-11-03 in OpenCode, Qwen Code, Pi, Cline and Copilot CLI: each listed the
-four skills and read the command the assess skill runs. Any other agent that can run a shell command can use the tool
+Tested on 2026-11-03 in OpenCode, Qwen Code, Pi, Oh My Pi, DeepSeek Harness, Cline and
+Copilot CLI (each listed the four skills and read the command the assess skill runs) and
+OpenClaw (`openclaw skills list` shows the four as ready). Any other agent that can run a shell command can use the tool
 directly: `npx vibeqm-check`.
 
 The skills read your repository and change nothing until you say yes; they never
