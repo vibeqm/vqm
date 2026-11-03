@@ -1,6 +1,6 @@
 {
   "name": "vibeqm",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "The Vibe Quality Model (VibeQM) for coding agents: skills over vibeqm-check that assess a repository, create the Level 2 files, close open gates one at a time, and answer the assessor's judgment questions. Self-assessment, performed by AI; read-only unless you say yes.",
   "author": {
     "name": "Eduardo Sanchez",
