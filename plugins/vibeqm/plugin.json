@@ -1,0 +1,41 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "vibeqm",
+  "version": "0.1.2",
+  "description": "The Vibe Quality Model (VibeQM) for coding agents: skills over vibeqm-check that assess a repository, create the Level 2 files, close open gates one at a time, and answer the assessor's judgment questions. Self-assessment, performed by AI; read-only unless you say yes.",
+  "author": {
+    "name": "Eduardo Sanchez",
+    "url": "https://vibeqm.com"
+  },
+  "homepage": "https://vibeqm.com",
+  "repository": "https://github.com/vibeqm/vqm",
+  "license": "MIT",
+  "keywords": [
+    "vibe-quality-model",
+    "vibeqm",
+    "ai-coding",
+    "code-quality",
+    "self-assessment",
+    "maturity-model"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "VibeQM",
+        "shortDescription": "Self-assess a repository against the Vibe Quality Model and close its open gates",
+        "longDescription": "Four skills over vibeqm-check: assess runs the checks and explains the level and each open gate; init shows the Level 2 template files and creates them after you say yes; fix-gates closes the next level's open gates one at a time, asking before each change; judgment answers the assessor's judgment questions. Nothing leaves your machine: no account, no telemetry, no server of ours.",
+        "developerName": "Eduardo Sanchez",
+        "category": "Productivity",
+        "websiteURL": "https://vibeqm.com",
+        "privacyPolicyURL": "https://github.com/vibeqm/vqm/blob/main/PRIVACY.md",
+        "termsOfServiceURL": "https://github.com/vibeqm/vqm/blob/main/LICENSE",
+        "defaultPrompt": [
+          "Use VibeQM to assess this repository and explain what stands between it and Level 2.",
+          "Use VibeQM to close the open Level 2 gates one at a time, asking me before each change."
+        ],
+        "logo": "./assets/icon.png",
+        "composerIcon": "./assets/icon.png"
+      }
+    }
+  }
+}
