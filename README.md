@@ -11,9 +11,9 @@ holds the material that goes with it. Start at [vibeqm.com](https://vibeqm.com).
 | The documentation standard: which records, where | [`framework/DOC_STANDARD.md`](framework/DOC_STANDARD.md) |
 | Templates for the records each level asks for | [`templates/`](templates/) |
 | The self-assessment tool | [`vibeqm-check`](https://www.npmjs.com/package/vibeqm-check): run `npx vibeqm-check` in your repository |
-| The plugin for Claude Code and Codex (four skills any agent can read) | [`plugins/vibeqm/`](plugins/vibeqm/) |
+| The plugin for Claude Code, Codex and GitHub Copilot CLI (four skills any agent can read) | [`plugins/vibeqm/`](plugins/vibeqm/) |
 
-## The VibeQM plugin for Claude Code and Codex
+## The VibeQM plugin for Claude Code, Codex and GitHub Copilot CLI
 
 Four skills over `vibeqm-check`, so your agent does the practice with you (in Codex the names are `$assess`, `$init`, `$fix-gates` and `$judgment`):
 
@@ -42,8 +42,30 @@ codex plugin marketplace add vibeqm/vqm
 codex plugin add vibeqm@vibeqm
 ```
 
-Neither install needs a directory listing or an account with us: both commands read
-this repository.
+Install it in GitHub Copilot CLI:
+
+```
+copilot plugin marketplace add vibeqm/vqm
+copilot plugin install vibeqm@vibeqm
+```
+
+None of these installs needs a directory listing or an account with us: each command
+reads this repository.
+
+### Other agents
+
+The skills are plain `SKILL.md` folders. Copy the four folders in
+[`plugins/vibeqm/skills/`](plugins/vibeqm/skills/) into the folder your agent reads:
+
+| Agent | Folder in your repository |
+|:--|:--|
+| OpenCode, Qwen Code, Pi (and Codex, Copilot CLI) | `.agents/skills/` |
+| Cline | `.cline/skills/` |
+| Claude Code without the plugin | `.claude/skills/` |
+
+Tested on 2026-11-03 in OpenCode, Qwen Code, Pi, Cline and Copilot CLI: each listed the
+four skills and read the command the assess skill runs. Any other agent that can run a shell command can use the tool
+directly: `npx vibeqm-check`.
 
 The skills read your repository and change nothing until you say yes; they never
 commit or push unless you ask.
@@ -54,9 +76,7 @@ the npm registry, and, if the GitHub CLI (`gh`) is logged in, `vibeqm-check` ask
 GitHub, read-only and with your own login, for the repository's CI runs and merged
 pull requests (`--offline` turns that off). The checks read your git history,
 including commit authors' names and emails, on your machine. See
-[`PRIVACY.md`](PRIVACY.md). They are plain `SKILL.md` folders, so any agent that
-reads skills can use them: copy the folders in
-[`plugins/vibeqm/skills/`](plugins/vibeqm/skills/) into that agent's skills folder.
+[`PRIVACY.md`](PRIVACY.md). 
 
 More arrives here as it is published, starting with the current setup for each
 coding agent.
