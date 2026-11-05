@@ -1,6 +1,6 @@
-# The Vibe Quality Model (VibeQM): specification v0.4.7
+# The Vibe Quality Model (VibeQM): specification v0.4.8
 
-Version 0.4.7, 2026-10-30. Part of the Vibe Quality Model: [vibeqm.com](https://vibeqm.com).
+Version 0.4.8, 2026-11-05. Part of the Vibe Quality Model: [vibeqm.com](https://vibeqm.com).
 
 The definition of the model: the five levels, the autonomy each one earns, the
 evidence rules and what each level requires. The assessor procedure
@@ -75,7 +75,10 @@ change by hand, but the work is not unsupervised:
 - **The AI peer**, a model from a different company, reviews every change the
   developer AI makes against the agreement.
 - **The kill switch** fires when the AI peer finds a breach or a Level 4 limit is
-  crossed: it suspends the developer AI's self-merging and autonomous work, reverts
+  crossed: it suspends the developer AI's self-merging and autonomous work by
+  removing access the agent can't give back to itself (a token revoked, a merge
+  permission removed, a branch rule tightened), not a flag the agent is asked to
+  respect; it reverts
   or quarantines the offending change if it has not been deployed, and alerts the
   owners. Autonomy returns only when a named person has reviewed the breach,
   recorded a lessons entry and restored it.
@@ -175,7 +178,9 @@ Nothing is required.
 - Agent deny rules.
 - A short note, or a section of the rules file, naming the development and the
   production environment (or saying nothing is live yet).
-- A record of each blocking check seen to fail.
+- A record of at least one blocking check seen to fail: a real failure that blocked
+  a change, or a planted fault it caught (§4 rule 2). Each check's own record is
+  Level 3 (Gates proven).
 
 **Practices**
 
@@ -186,10 +191,13 @@ Nothing is required.
 - **Peer review before merge.** Every change gets a human or an AI peer review
   (§4 rule 3). The unit is the push or the pull request, not the commit: one review
   at each push to the shared branch, or on each pull request, covers every commit
-  since the last reviewed one, and nothing reaches staging or production unreviewed.
+  since the last reviewed one, and nothing reaches staging or production unreviewed. The gate counts once 20 changes since adoption have all been reviewed;
+  until then it is in place, with its count, and one unreviewed pushed change
+  restarts the count (§13).
 - **Verification on every change.** Tests, linter and static analysis run, and a
   failure blocks the change.
-- **Security review before every push.** An AI security review of the change (for
+- **Security review before every push.** Before the change reaches the shared
+  branch or a pull request is opened: an AI security review of the change (for
   example Claude Code's `/security-review`) or static security analysis of it
   (CodeQL, Semgrep), secret scanning, and a dependency vulnerability scan
   that blocks on critical findings.
@@ -207,7 +215,7 @@ Nothing is required.
 - The agent can't force-push, skip checks, delete outside the project or read
   secrets.
 - Every change names a human owner.
-- Every blocking check has been seen to fail.
+- At least one blocking check has been seen to fail (each one, from Level 3).
 
 ### Level 3 — Standardized (one enforced standard across projects)
 
@@ -226,7 +234,10 @@ Nothing is required.
 - Provenance record: which model and version wrote and which reviewer reviewed each
   change.
 - Critical-rules table, risk-class definitions, model register, gate proof record,
-  data boundary.
+  data boundary (secrets and personal data never go to an AI company).
+- **An AI budget**: a monthly or per-task limit on AI spending, where it is
+  enforced (the provider's spending cap, a key's limit, a plan) and who is told when
+  it is reached.
 - Lessons log, and a blameless postmortem for every incident.
 - Environment definitions for development, testing/staging and production, as code;
   the deployment pipeline configuration.
@@ -267,7 +278,10 @@ Nothing is required.
   standard states another cadence, and shows every project follows the standard.
 - **Critical rules enforced** by hooks, blocking checks or permissions (§7).
 - Pinned models; rules files within the size limit and reviewed; agent plug-ins and
-  tools pinned and added as high-risk changes; parallel agents on separate branches;
+  tools pinned and added as high-risk changes, pinned to a commit hash or checksum
+  where the source offers one, since a version tag can be moved; every
+  change to the agent's guardrails (rules files, hooks, CI configuration, agent
+  settings) approved by a person, who is not its author when the author is a person; parallel agents on separate branches;
   a license check on new code; a lessons entry for every escaped defect.
 
 ### Level 4 — Measured
@@ -283,6 +297,7 @@ Nothing is required.
   definitions.
 - Dependency freshness: patch latency and how far behind current versions the
   product is.
+- AI cost per merged change, against the Level 3 budget (§8).
 - Service-level objectives for production, with their measurements.
 - **One signal of quality from outside the team**: written by people
   outside the team, such as defects users report, support requests, externally raised
@@ -367,8 +382,9 @@ From Level 4:
 - **The self-merge stop (§3) is checked at every merge**. Before each
   self-merge, a hook checks the change (its size, deleted or weakened tests, the
   re-sorted risk class, the reviewer's verdict, the security scan) and the numbers
-  that can be read on the day (escaped defects and reverts over the last 30 days). A
-  breach stops self-merging at once. It clears when the numbers are back within
+  that can be read on the day (escaped defects and reverts over the last 30 days, any
+  critical security finding open on the main branch, and AI spend against the
+  budget). A breach stops self-merging at once. It clears when the numbers are back within
   their limits, or when a named person records an override with a lessons entry.
   Numbers that only mean something over a month (DORA's, service-level objectives)
   are read at the monthly review: a breach found there stops self-merging from that
@@ -392,6 +408,7 @@ From Level 4:
 | Change failure rate (DORA) | Share of deployments that cause a failure needing a fix or rollback | Deployment and incident records |
 | Time to restore service (DORA) | Time to recover from a failure in production | Incident records |
 | Dependency freshness | Patch latency against the update policy (§10), and versions behind current | Software inventory, update tool |
+| AI cost | AI spending per merged change, monthly, against the budget | The providers' usage and billing pages |
 | Service-level objectives | Agreed targets for availability, latency or errors in production, and their measurement | Monitoring |
 
 Each number has a written definition, a source, a baseline for each model family
@@ -415,8 +432,10 @@ records why; without that record, the numbers earn no autonomy that month.
 
 | Risk | Rule | From level |
 |:--|:--|:--|
-| Code and data sent to AI companies | A written **data boundary**: which code and data may go to which AI company, and under what terms. Secrets and personal data never do | 2 (secrets and personal data); 3 (written boundary) |
-| Agent plug-ins and tools | Plug-ins, tool servers (MCP) and skills from outside the team are treated as dependencies: pinned, reviewed, and added only as high-risk changes | 3 |
+| Code and data sent to AI companies | A written **data boundary**: which code and data may go to which AI company, and under what terms. Secrets and personal data never do | 3 |
+| Agent plug-ins and tools | Plug-ins, tool servers (MCP) and skills from outside the team are treated as dependencies: pinned (to a commit hash or checksum where the source offers one), reviewed, and added only as high-risk changes | 3 |
+| AI spending | A stated budget, where it is enforced, and who is told when it is reached; from Level 4, cost per merged change tracked and the budget read by the automatic stop | 3 |
+| The agent's own guardrails | Rules files, hooks, CI configuration and agent settings change only with a person's approval | 3 |
 | Several agents in parallel | Each agent works on its own branch; every change goes through the same checks; no two agents change the same area at once without a person deciding the order | 3 |
 | Licensing of AI-generated code | A check for code copied from sources under incompatible licenses | 3 |
 | Rolling back AI changes | Every change can be reverted on its own, and the team has tried a rollback | 3 |
@@ -505,7 +524,8 @@ Model.
   claims are assessed against the current version; existing claims stay valid until
   their own expiry, and say which version they were assessed against.
 - Two AI models from different companies assess independently, each writing its own
-  report. When they disagree, the lower level stands.
+  report. The assessor reads the repository and its recorded
+  results and never runs the repository's own code. When they disagree, the lower level stands.
 - A named person countersigns every report and records whether the two agree.
 - Reports state what they cover and which checks the assessor could not see; those
   stay unmet until proof is supplied.
