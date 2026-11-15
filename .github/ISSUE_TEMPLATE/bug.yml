@@ -1,0 +1,30 @@
+name: Bug in a template or skill
+description: A template or a skill in this repository does something wrong
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A bug in the `vibeqm-check` tool itself belongs in [vibeqm/vibeqm-check](https://github.com/vibeqm/vibeqm-check/issues).
+  - type: input
+    id: what
+    attributes:
+      label: Which template or skill?
+      placeholder: "templates/level-2/.github/workflows/checks.yml, or the fix-gates skill"
+    validations:
+      required: true
+  - type: textarea
+    id: happened
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: How to reproduce it
+  - type: input
+    id: env
+    attributes:
+      label: Agent, plugin version and operating system
+      placeholder: "Claude Code 2.1.280, plugin 0.1.6, macOS"

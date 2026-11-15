@@ -87,4 +87,11 @@ coding agent.
 Assessments made with this material are self-assessments, performed by AI and owned
 by the team that runs them.
 
+## Contributing
+
+Run the assessment on a repository you know and tell us if the result was fair;
+"this gate is wrong because…" is a welcome issue. Templates, skills and support for
+more agents take pull requests. See [`CONTRIBUTING.md`](CONTRIBUTING.md), and
+[Discussions](https://github.com/vibeqm/vqm/discussions) for questions.
+
 MIT licensed.

@@ -1,0 +1,34 @@
+name: Agent support report
+description: You tried the VibeQM skills or plugin in a coding agent (it worked, or it didn't)
+labels: ["agent support"]
+body:
+  - type: input
+    id: agent
+    attributes:
+      label: Agent and version
+      placeholder: "Cursor 3.2"
+    validations:
+      required: true
+  - type: input
+    id: folder
+    attributes:
+      label: How you installed the skills
+      description: The plugin command, or the folder you copied the four skill folders into.
+      placeholder: ".cursor/skills/"
+    validations:
+      required: true
+  - type: dropdown
+    id: result
+    attributes:
+      label: Did the agent list the four skills and run the assess skill?
+      options:
+        - "Yes, all four listed and assess ran"
+        - "Listed, but assess didn't run"
+        - "No, the skills weren't found"
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: What you saw
+      description: Paste the agent's output if it helps. Don't paste secrets.

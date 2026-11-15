@@ -1,0 +1,36 @@
+name: Model feedback
+description: A level, gate or rule of the Vibe Quality Model is wrong, unclear or missing something
+labels: ["model feedback"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you. Model changes come in as issues: the files in `framework/` are generated at each release, so a pull request to them would be overwritten.
+  - type: input
+    id: where
+    attributes:
+      label: Which level, gate or section?
+      placeholder: "Level 2, Peer review on every change"
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong or missing?
+      description: '"This gate is wrong because…" is welcome.'
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: What happened when you used it?
+      description: The repository's kind and size, the agent you use, what vibeqm-check or the plugin reported, and what you think it should have reported. Don't paste secrets or private code.
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would you change?
+  - type: input
+    id: version
+    attributes:
+      label: Model or tool version
+      placeholder: "framework 0.4.8 / vibeqm-check 0.4.9"
