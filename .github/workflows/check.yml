@@ -41,4 +41,4 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 0
-      - uses: vibeqm/vibeqm-check@3400cd2fef9cdaa2d101c1e20880d2ddb1a4fa66 # v0.4.10
+      - uses: vibeqm/vibeqm-check@e1ea5f66b50fab8efd41eed6ac6dfbb4706605c7 # v0.4.11
