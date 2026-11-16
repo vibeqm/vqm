@@ -28,9 +28,14 @@ for m in manifests:
 
 versions = {m: data[m].get("version") for m in manifests[2:] if m in data}
 cat = data.get(".claude-plugin/marketplace.json", {})
-for p in cat.get("plugins", []):
-    if p.get("name") == "vibeqm" and "version" in p:
-        versions[".claude-plugin/marketplace.json"] = p["version"]
+entry = next((p for p in cat.get("plugins", []) if p.get("name") == "vibeqm"), None)
+if entry is None:
+    problems.append(".claude-plugin/marketplace.json: no vibeqm plugin entry")
+else:
+    versions[".claude-plugin/marketplace.json"] = entry.get("version")
+for m, v in versions.items():
+    if not isinstance(v, str) or not v.strip():
+        problems.append(f"{m}: no version")
 if len(set(versions.values())) > 1:
     problems.append(f"plugin versions differ: {versions}")
 

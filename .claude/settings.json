@@ -25,7 +25,17 @@
       "Read(**/.env.*)",
       "Read(~/.ssh/**)",
       "Read(~/.aws/**)",
-      "Read(~/.config/gcloud/**)"
+      "Read(~/.config/gcloud/**)",
+      "Bash(cat *.env*)",
+      "Bash(less *.env*)",
+      "Bash(head *.env*)",
+      "Bash(tail *.env*)",
+      "Bash(grep * *.env*)",
+      "Bash(sed * *.env*)",
+      "Bash(source *.env*)",
+      "Bash(* ~/.ssh/*)",
+      "Bash(* ~/.aws/*)",
+      "Bash(* ~/.config/gcloud/*)"
     ],
     "ask": [
       "Bash(gh release*)",
