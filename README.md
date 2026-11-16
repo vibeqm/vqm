@@ -11,9 +11,9 @@ holds the material that goes with it. Start at [vibeqm.com](https://vibeqm.com).
 | The documentation standard: which records, where | [`framework/DOC_STANDARD.md`](framework/DOC_STANDARD.md) |
 | Templates for the records each level asks for | [`templates/`](templates/) |
 | The self-assessment tool | [`vibeqm-check`](https://www.npmjs.com/package/vibeqm-check): run `npx vibeqm-check` in your repository |
-| The plugin for Claude Code, Codex and GitHub Copilot CLI (four skills any agent can read) | [`plugins/vibeqm/`](plugins/vibeqm/) |
+| The plugin for Claude Code, Codex, GitHub Copilot CLI and Google Antigravity (four skills any agent can read) | [`plugins/vibeqm/`](plugins/vibeqm/) |
 
-## The VibeQM plugin for Claude Code, Codex and GitHub Copilot CLI
+## The VibeQM plugin for Claude Code, Codex, GitHub Copilot CLI and Google Antigravity
 
 Four skills over `vibeqm-check`, so your agent does the practice with you (in Codex the names are `$assess`, `$init`, `$fix-gates` and `$judgment`):
 
@@ -48,6 +48,15 @@ Install it in GitHub Copilot CLI:
 copilot plugin marketplace add vibeqm/vqm
 copilot plugin install vibeqm@vibeqm
 ```
+
+Install it in Google Antigravity (Gemini), with the `agy` CLI:
+
+```
+agy plugin install https://github.com/vibeqm/vqm
+```
+
+(Tested on agy 1.5.9: `agy plugin list` shows vibeqm with its four skills. A full
+assessment run in Antigravity is not tested yet; reports are welcome.)
 
 None of these installs needs a directory listing or an account with us: each command
 reads this repository.
