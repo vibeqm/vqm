@@ -33,4 +33,4 @@ body:
     id: version
     attributes:
       label: Model or tool version
-      placeholder: "framework 0.4.8 / vibeqm-check 0.4.9"
+      placeholder: "framework 0.4.8 / vibeqm-check 0.4.10"
