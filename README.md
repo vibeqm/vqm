@@ -55,8 +55,9 @@ Install it in Google Antigravity (Gemini), with the `agy` CLI:
 agy plugin install https://github.com/vibeqm/vqm
 ```
 
-(Tested on agy 1.5.9: `agy plugin list` shows vibeqm with its four skills. A full
-assessment run in Antigravity is not tested yet; reports are welcome.)
+(Tested on agy 1.5.9 with Gemini 4 Argon: `agy plugin list` shows vibeqm with its four
+skills, and "assess this repository with VibeQM" ran `vibeqm-check` and reported the
+level and the open gates.)
 
 None of these installs needs a directory listing or an account with us: each command
 reads this repository.
