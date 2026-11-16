@@ -74,4 +74,4 @@ whose facts are met, with reasons a person can check.
 | Three environments | Is staging production-like? |
 
 Levels 4 and 5 have judgment questions too; they are in the assessor procedure, with
-the full list of gates: https://vibeqm.com/assessor
+the full list of gates: <https://vibeqm.com/assessor>

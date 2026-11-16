@@ -9,7 +9,7 @@ code.
 Run the assessment on a repository you know well, then tell us whether the result was
 fair:
 
-```
+```text
 npx vibeqm-check
 ```
 

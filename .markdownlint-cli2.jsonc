@@ -1,0 +1,17 @@
+// markdownlint for this repository (VibeQM Level 2: verification on every change).
+// The rules that fight hand-wrapped prose and generated tables are off; the rest
+// (headings, lists, fences, links) stay on.
+{
+  "config": {
+    "default": true,
+    "MD013": false,
+    "MD024": { "siblings_only": true },
+    "MD033": false,
+    "MD041": false,
+    "MD060": false
+  },
+  "globs": ["**/*.md"],
+  // framework/ is generated from the VibeQM working copies (lint it there); templates/
+  // are starter files with blanks, copied into vibeqm-check, so they change together.
+  "ignores": ["node_modules/**", "framework/**", "templates/**"]
+}

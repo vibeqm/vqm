@@ -78,4 +78,4 @@ runs it and explains the answer.
      judgment questions, which the tool can't.
 
 The full procedure, for an assessment by two models and a person's countersignature,
-is the VibeQM assessor: https://vibeqm.com/assessor
+is the VibeQM assessor: <https://vibeqm.com/assessor>
