@@ -27,6 +27,11 @@ the VibeQM plugin.
   session. Tag a release on `main` after the merge, never before. The ruleset lives on
   GitHub; its settings are recorded in `.github/rulesets/protect-main.json` (update the
   file when the ruleset changes).
+  On the maintainer's machine every push is peer reviewed by a model from another company
+  and leaves a record in `reviews/push/`: commit that record to the same branch and push
+  again (a push that only adds review records is not reviewed again) before opening or
+  merging the pull request. Fetch `origin` first, so a new branch is compared with the
+  current `main`.
 - Development and production: see `docs/DEV_AND_PRODUCTION.md`. Merging to `main`
   publishes to everyone who installs the plugin, so the agent merges a pull request or
   pushes a release tag only after the person confirms in the session.
