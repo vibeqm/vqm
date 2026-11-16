@@ -9,7 +9,9 @@ the VibeQM plugin.
   by hand. Changes to the model go through an issue ("model feedback").
 - The four skills in `plugins/vibeqm/skills/` pin one `vibeqm-check@<version>`; when the
   pin or a skill changes, bump `version` in the three plugin manifests and in
-  `.claude-plugin/marketplace.json` together (`make check` refuses a mismatch).
+  `.claude-plugin/marketplace.json` together, and record the pin in `package.json`
+  (then `npm install --package-lock-only`), so the dependency scan covers it
+  (`make check` refuses a mismatch).
 - Templates in `templates/level-2/` are starter files with blanks; vibeqm-check bundles a
   copy, so a template change is made here first and then synced there.
 - Wording: "assessment" and "self-assessed", never "appraisal", "certified" or
@@ -22,7 +24,9 @@ the VibeQM plugin.
   template (what, why, how tested). Wait for CI (`check`, `security`,
   `self-assessment`) to pass and every review thread to be resolved; merge with a merge
   commit (`gh pr merge --merge --delete-branch`) only after the person confirms in the
-  session. Tag a release on `main` after the merge, never before.
+  session. Tag a release on `main` after the merge, never before. The ruleset lives on
+  GitHub; its settings are recorded in `.github/rulesets/protect-main.json` (update the
+  file when the ruleset changes).
 - Development and production: see `docs/DEV_AND_PRODUCTION.md`. Merging to `main`
   publishes to everyone who installs the plugin, so the agent merges a pull request or
   pushes a release tag only after the person confirms in the session.

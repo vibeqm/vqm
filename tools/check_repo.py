@@ -58,6 +58,12 @@ for skill in sorted((root / "plugins/vibeqm/skills").glob("*/SKILL.md")):
 allpins = set().union(*pins.values()) if pins else set()
 if len(allpins) > 1:
     problems.append(f"skills pin different vibeqm-check versions: {sorted(allpins)}")
+try:
+    declared = json.loads((root / "package.json").read_text())["devDependencies"]["vibeqm-check"]
+    if allpins and declared not in allpins:
+        problems.append(f"package.json records vibeqm-check {declared}, the skills pin {sorted(allpins)}")
+except Exception as e:  # noqa: BLE001
+    problems.append(f"package.json: no vibeqm-check version recorded ({e})")
 if len(pins) != 4:
     problems.append(f"expected 4 skills, found {len(pins)}")
 
