@@ -3,7 +3,7 @@
 ## Reporting a vulnerability
 
 Please report security problems privately, not in a public issue: use
-**[Report a vulnerability](../../security/advisories/new)** on this repository's
+**[Report a vulnerability](https://github.com/vibeqm/vqm/security/advisories/new)** on this repository's
 Security tab (GitHub's private vulnerability reporting). Include what you found, how to
 reproduce it, and what it could let someone do.
 
@@ -15,7 +15,7 @@ with credit to you, unless you'd rather stay anonymous.
 Anything that would let this project's files or tools do something a user did not ask
 for: run code, read or send files or secrets, weaken a check without saying so, or
 report a gate as met when it is not. A wrong level on your own repository is usually a
-model question; open a normal issue for that.
+model question or a wrong result; open a normal issue for that.
 
 ## Supported versions
 
