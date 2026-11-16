@@ -22,13 +22,18 @@ manifests = [
 data = {}
 for m in manifests:
     try:
-        data[m] = json.loads((root / m).read_text())
+        parsed = json.loads((root / m).read_text())
+        if isinstance(parsed, dict):
+            data[m] = parsed
+        else:
+            problems.append(f"{m}: manifest must be a JSON object")
     except Exception as e:  # noqa: BLE001 — any failure is a problem to report
         problems.append(f"{m}: not valid JSON ({e})")
 
 versions = {m: data[m].get("version") for m in manifests[2:] if m in data}
 cat = data.get(".claude-plugin/marketplace.json", {})
-entry = next((p for p in cat.get("plugins", []) if p.get("name") == "vibeqm"), None)
+plugins = cat.get("plugins", []) if isinstance(cat.get("plugins"), list) else []
+entry = next((p for p in plugins if isinstance(p, dict) and p.get("name") == "vibeqm"), None)
 if entry is None:
     problems.append(".claude-plugin/marketplace.json: no vibeqm plugin entry")
 else:

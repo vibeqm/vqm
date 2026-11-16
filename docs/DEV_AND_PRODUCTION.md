@@ -14,4 +14,4 @@ update (`/plugin marketplace add vibeqm/vqm`, `codex plugin marketplace add vibe
 - Every push runs the checks again on GitHub (`.github/workflows/check.yml`) and, on the
   maintainer's machine, an AI peer review by a model from another company
   (`reviews/push/`).
-- Each plugin version is tagged (`v0.1.7` and later).
+- Each plugin version is tagged (`v0.1.8` and later).

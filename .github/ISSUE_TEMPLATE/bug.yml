@@ -27,4 +27,4 @@ body:
     id: env
     attributes:
       label: Agent, plugin version and operating system
-      placeholder: "Claude Code 2.1.280, plugin 0.1.7, macOS"
+      placeholder: "Claude Code 2.1.280, plugin 0.1.8, macOS"

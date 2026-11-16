@@ -1,0 +1,8 @@
+# Dependency alerts and updates: this repository's only dependencies are the GitHub
+# Actions its CI uses (pinned to commit hashes). VibeQM Level 2: dependency scan.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

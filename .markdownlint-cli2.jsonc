@@ -11,7 +11,5 @@
     "MD060": false
   },
   "globs": ["**/*.md"],
-  // framework/ is generated from the VibeQM working copies (lint it there); templates/
-  // are starter files with blanks, copied into vibeqm-check, so they change together.
-  "ignores": ["node_modules/**", "framework/**", "templates/**"]
+  "ignores": ["node_modules/**"]
 }
