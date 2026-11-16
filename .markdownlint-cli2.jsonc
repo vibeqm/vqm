@@ -11,5 +11,7 @@
     "MD060": false
   },
   "globs": ["**/*.md"],
-  "ignores": ["node_modules/**"]
+  // reviews/push/ holds the push-review records as the reviewer wrote them; editing
+  // them to satisfy a linter would change the record.
+  "ignores": ["node_modules/**", "reviews/**"]
 }
