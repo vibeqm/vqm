@@ -1,0 +1,13 @@
+# Dependency alerts and updates (VibeQM Level 2: dependency scan): the GitHub Actions the
+# CI uses (pinned to commit hashes), and the vibeqm-check version the plugin's skills run,
+# recorded in package.json.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly

@@ -1,6 +1,6 @@
-# The Vibe Quality Model (VibeQM): specification v0.4.8
+# The Vibe Quality Model (VibeQM): specification v0.4.9
 
-Version 0.4.8, 2026-11-05. Part of the Vibe Quality Model: [vibeqm.com](https://vibeqm.com).
+Version 0.4.9, 2026-11-16. Part of the Vibe Quality Model: [vibeqm.com](https://vibeqm.com).
 
 The definition of the model: the five levels, the autonomy each one earns, the
 evidence rules and what each level requires. The assessor procedure
@@ -162,7 +162,7 @@ Nothing is required.
 
 ### Level 2 — Guarded (the basics, for every project)
 
-**Artifacts**
+#### Artifacts
 
 - A rules file specific to the repository, and a README.
 - Written requirements with acceptance criteria (an issue tracker, or a short file);
@@ -182,7 +182,7 @@ Nothing is required.
   a change, or a planted fault it caught (§4 rule 2). Each check's own record is
   Level 3 (Gates proven).
 
-**Practices**
+#### Practices
 
 - **Requirements first.** Every change starts from a written requirement or issue
   with acceptance criteria. When a requirement is ambiguous, the agent **asks the
@@ -191,7 +191,9 @@ Nothing is required.
 - **Peer review before merge.** Every change gets a human or an AI peer review
   (§4 rule 3). The unit is the push or the pull request, not the commit: one review
   at each push to the shared branch, or on each pull request, covers every commit
-  since the last reviewed one, and nothing reaches staging or production unreviewed. The gate counts once 20 changes since adoption have all been reviewed;
+  since the last reviewed one, and nothing reaches staging or production unreviewed. The gate counts once 10 changes since adoption have all been reviewed (the count looks
+  for a habit of peer review, not a setup: one reviewed push shows the review exists;
+  ten in a row show it happens every time);
   until then it is in place, with its count, and one unreviewed pushed change
   restarts the count (§13).
 - **Verification on every change.** Tests, linter and static analysis run, and a
@@ -247,7 +249,7 @@ Nothing is required.
 - Runbooks for deploy, rollback and incident response; backup and restore records.
 - A training record: the team trained on the standard and the AI tools.
 
-**Practices**
+#### Practices
 
 - **Requirements management.** Traceability maintained; changes to requirements
   controlled and recorded; diagrams kept current; clarifying questions with options
@@ -286,7 +288,7 @@ Nothing is required.
 
 ### Level 4 — Measured
 
-**Artifacts**
+#### Artifacts
 
 - The four VibeQM numbers (§8): escaped defects, security findings, review time with
   review yield, churn; and the revert count as the cross-check on escaped defects.
@@ -307,7 +309,7 @@ Nothing is required.
 - Baselines for each model family, limits, the warm-up or revalidation record for the
   last model switch, the automatic-stop check, and records linking numbers to process changes.
 
-**Practices**
+#### Practices
 
 - The numbers are reviewed monthly, where the limits are set and recalibrated;
   baselines restart when the model family changes, with the warm-up rule, and are
@@ -319,14 +321,14 @@ Nothing is required.
 
 ### Level 5 — Self-Improving
 
-**Artifacts**
+#### Artifacts
 
 - A lessons log in which each entry names the rule, check, skill or permission it
   changed and links to the commit.
 - Approval records for every change to the AI's own rules, checks and permissions.
 - Recurrence data by kind of defect, before and after each lesson.
 
-**Practices**
+#### Practices
 
 - **Root-cause analysis** of every escaped defect and incident (for example "5
   whys"), then the strongest fix: trap, then permission, then skill, then rule.
@@ -512,8 +514,8 @@ Model.
   agent alone, an answer from the person, a setting on the code host, or use) and
   the autonomy the next level earns (§3).
 - **In place**. A gate whose practice is set up and recorded but measured
-  over use (peer review counts after 20 reviewed changes) is reported in
-  place, with how far along it is ("counts after 20 reviewed changes, 3 so far"). It
+  over use (peer review counts after 10 reviewed changes) is reported in
+  place, with how far along it is ("counts after 10 reviewed changes, 3 so far"). It
   counts as not met for the level; the result says when it will count. One pushed
   change without a review restarts the count at the next reviewed change, and the
   result names the change that broke the run. Where vibeqm-check runs on every push or on a schedule, it may add

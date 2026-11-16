@@ -26,7 +26,7 @@ Four skills over `vibeqm-check`, so your agent does the practice with you (in Co
 
 Install it in Claude Code:
 
-```
+```text
 /plugin marketplace add vibeqm/vqm
 /plugin install vibeqm@vibeqm
 ```
@@ -37,21 +37,21 @@ Install it in Claude Code:
 Install it in Codex (CLI 0.147 or later; the same plugin folder carries a portable
 [Agent Plugins](https://agent-plugins.org) manifest and a Codex catalog):
 
-```
+```text
 codex plugin marketplace add vibeqm/vqm
 codex plugin add vibeqm@vibeqm
 ```
 
 Install it in GitHub Copilot CLI:
 
-```
+```text
 copilot plugin marketplace add vibeqm/vqm
 copilot plugin install vibeqm@vibeqm
 ```
 
 Install it in Google Antigravity (Gemini), with the `agy` CLI:
 
-```
+```text
 agy plugin install https://github.com/vibeqm/vqm
 ```
 
@@ -89,7 +89,7 @@ the npm registry, and, if the GitHub CLI (`gh`) is logged in, `vibeqm-check` ask
 GitHub, read-only and with your own login, for the repository's CI runs and merged
 pull requests (`--offline` turns that off). The checks read your git history,
 including commit authors' names and emails, on your machine. See
-[`PRIVACY.md`](PRIVACY.md). 
+[`PRIVACY.md`](PRIVACY.md).
 
 More arrives here as it is published, starting with the current setup for each
 coding agent.

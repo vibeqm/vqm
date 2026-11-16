@@ -9,7 +9,7 @@ code.
 Run the assessment on a repository you know well, then tell us whether the result was
 fair:
 
-```
+```text
 npx vibeqm-check
 ```
 
@@ -28,6 +28,26 @@ is lower than your practice deserves, or higher, open a
 | **Support for another agent** (where it reads skills, how to install) | Open an [agent support report](https://github.com/vibeqm/vqm/issues/new?template=agent-support.yml) with what you tested, or a pull request to the README's agent table. |
 | **The self-assessment tool** (`vibeqm-check`) | Its own repository: [vibeqm/vibeqm-check](https://github.com/vibeqm/vibeqm-check/issues). |
 | A question or an idea that isn't a change yet | [Discussions](https://github.com/vibeqm/vqm/discussions). |
+
+## How a change gets in
+
+`main` is protected for everyone, the maintainer included: nobody pushes to it directly.
+
+1. **Fork** the repository (or, with write access, make a branch): name the branch for
+   the change, for example `fix-assess-wording` or `agent-support-cursor`.
+2. **Run the checks** before you push: `make check` (the repository checks and
+   markdownlint). Enable the committed hooks once per clone, and they run on every
+   commit: `git config core.hooksPath .githooks`.
+3. **Open a pull request** against `main`. The template asks what changed, why, and how
+   you tested it; link the issue it closes.
+4. **CI must pass**: `check`, `security` (secret scanning and static analysis) and
+   `self-assessment` (this repository assessed with its own tool). Every review
+   conversation must be resolved.
+5. **The maintainer reviews and merges** with a merge commit (squash and rebase are off,
+   so each commit keeps its review record), and the branch is deleted.
+
+Releases are tagged on `main` after the merge (`v0.1.8` and later); the plugin
+version in the manifests says what each tag ships.
 
 ## Pull requests
 
@@ -48,6 +68,11 @@ is lower than your practice deserves, or higher, open a
 Issues labelled [good first issue](https://github.com/vibeqm/vqm/labels/good%20first%20issue)
 need no knowledge of the codebase. Issues labelled
 [help wanted](https://github.com/vibeqm/vqm/labels/help%20wanted) are bigger.
+
+## Security and conduct
+
+Report a vulnerability privately, never in a public issue: see [SECURITY.md](SECURITY.md).
+Everyone taking part follows the [code of conduct](CODE_OF_CONDUCT.md).
 
 ## License
 

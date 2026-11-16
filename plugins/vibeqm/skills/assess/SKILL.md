@@ -38,7 +38,7 @@ runs it and explains the answer.
 2. Run the checks as JSON:
 
    ```bash
-   npx --yes vibeqm-check@0.4.10 --json
+   npx --yes vibeqm-check@0.4.11 --json
    ```
 
    It needs Node.js 20 or later and git. If the GitHub CLI (`gh`) is logged in, the
@@ -62,8 +62,8 @@ runs it and explains the answer.
    - the open gates, each with one line of evidence, its minutes and who it needs,
      cheapest first, with the total;
    - gates marked **in place**: set up and counting with use; give the count
-     ("peer review counts after 20 reviewed changes, 3 so far"; one unreviewed push
-     restarts it);
+     ("peer review counts after 10 reviewed changes, 3 so far"; one unreviewed push
+     restarts it; the count looks for a habit of peer review, not a setup);
    - gates marked **not visible**: the tool can't see them from here (host settings);
      say what proof would show them, or that the tool reads branch rules when the
      GitHub CLI is logged in;
@@ -78,4 +78,4 @@ runs it and explains the answer.
      judgment questions, which the tool can't.
 
 The full procedure, for an assessment by two models and a person's countersignature,
-is the VibeQM assessor: https://vibeqm.com/assessor
+is the VibeQM assessor: <https://vibeqm.com/assessor>

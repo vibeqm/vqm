@@ -33,7 +33,7 @@ through them with the person, one gate at a time.
 1. From the repository root, run:
 
    ```bash
-   npx --yes vibeqm-check@0.4.10 --json
+   npx --yes vibeqm-check@0.4.11 --json
    ```
 
 2. Take the open gates (`status` not `met`) of the **next** level only (`next` in
@@ -63,7 +63,8 @@ through them with the person, one gate at a time.
 5. Some gates need time or other people, and can't close in one session: "Checks seen
    to fail" needs a check that really blocked a change, or a planted-fault drill you
    run and record; "Peer review on every change" reads in place once review runs and
-   counts after 20 reviewed changes (one unreviewed push restarts the count, and the
+   counts after 10 reviewed changes, because it looks for a habit of peer review, not
+   a setup (one unreviewed push restarts the count, and the
    hook is per clone). Set up what makes them happen, and say when the gate can close.
 6. When every fact check of the level is met, offer the **judgment** skill: the
    assessor's judgment questions decide whether the evidence is real practice or only

@@ -27,7 +27,7 @@ with the code, and readable by AI agents as well as people.
 
 ## 2. Standard layout
 
-```
+```text
 VibeQM/
   README.md            index; what lives where; agents read first
   plan/                PROJECT_PLAN.md: scope, deliverables, schedule, milestones
@@ -92,6 +92,7 @@ Each change is one row in `tailoring/TAILORING.md`:
 |:--|:--|:--|:--|:--|:--|
 
 Rules:
+
 - Tailoring never removes a document required by the level the project claims;
   drop the claim instead. The one exception: for a product with no live production
   service, a document for a service-bound item ([the specification](VQM_SPEC.md) §6) is replaced by the

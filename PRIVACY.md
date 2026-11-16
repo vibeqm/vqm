@@ -16,4 +16,4 @@ nothing about you or your code.
 - **Installing it.** The skills run `npx vibeqm-check`, which downloads the package
   from the npm registry; npm's own terms apply to that download.
 
-Questions: open an issue at https://github.com/vibeqm/vqm/issues.
+Questions: open an issue at <https://github.com/vibeqm/vqm/issues>.

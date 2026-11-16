@@ -1,0 +1,11 @@
+{
+  "proofs": [
+    {
+      "gate": "Checks seen to fail",
+      "evidence": "Planted-fault drill: a mismatched plugin version in plugins/vibeqm/plugin.json, committed; the committed pre-commit hook ran make check and refused the commit",
+      "by": "Eduardo Sanchez",
+      "date": "2026-11-16",
+      "ref": "docs/DRILLS.md"
+    }
+  ]
+}

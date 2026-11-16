@@ -1,6 +1,6 @@
-# VibeQM assessor procedure v0.4.8
+# VibeQM assessor procedure v0.4.9
 
-Version 0.4.8, 2026-11-05. Part of the Vibe Quality Model: [vibeqm.com](https://vibeqm.com).
+Version 0.4.9, 2026-11-16. Part of the Vibe Quality Model: [vibeqm.com](https://vibeqm.com).
 
 The Vibe Quality Model is assessed by AI. This file is the assessor: a procedure
 that any capable coding agent (Claude Code, Codex, Gemini CLI, Copilot agent…)
@@ -44,7 +44,7 @@ Give the agent this instruction from the repository root:
    cannot see (private CI settings, branch protection, production access) is marked
    **not visible** and stays unmet until the countersigner attaches proof.
    A gate whose practice is set up and recorded but measured over use is marked
-   **in place**, with how far along it is ("3 of 20 reviewed changes"); it is not
+   **in place**, with how far along it is ("3 of 10 reviewed changes"); it is not
    met until the use has happened.
 7. **Say what would change the result.** For the first unmet level, list the exact
    evidence missing.
@@ -96,7 +96,7 @@ Give the agent this instruction from the repository root:
 | 2 | Owner per change | Every change in the sample names a human owner (author, assignee or approver), including changes the AI merged itself | — |
 | 2 | Checks seen to fail | At least one blocking check (each check's own record is Level 3's Gates proven). Automated checks: history shows one blocking a merge (a failed CI run followed by a fix counts), or a recorded planted fault it caught. Process gates: one real change they stopped or corrected ([the specification](VQM_SPEC.md) §4 rule 2) | — |
 | 2 | Requirements first | Sampled changes trace to a written requirement or issue with acceptance criteria; where a requirement was ambiguous, the clarifying questions (multiple options, recommendation first) and the answer are recorded | Are the acceptance criteria testable? |
-| 2 | Peer review on every change | Every sampled change is covered by a human peer review or an AI peer review by a model from a different company, in a separate session ([the specification](VQM_SPEC.md) §4 rule 3). The review is due at the push or pull request and covers every commit since the last reviewed one; commits not pushed yet are not counted, and nothing reaches staging or production unreviewed. A team that adopts review later is sampled from its adoption date, once at least 20 changes have followed it; earlier history is not claimed as reviewed. A review record written by a push hook with a passing verdict, naming the commit range, counts on its own when the reviewer is from a different company. Until 20 changes have followed adoption, with every one reviewed, the gate is **in place**: reported with the count, not met. One pushed change without a review restarts the count at the next reviewed change, and the report names it | Did anything reach staging or production before its review? |
+| 2 | Peer review on every change | Every sampled change is covered by a human peer review or an AI peer review by a model from a different company, in a separate session ([the specification](VQM_SPEC.md) §4 rule 3). The review is due at the push or pull request and covers every commit since the last reviewed one; commits not pushed yet are not counted, and nothing reaches staging or production unreviewed. A team that adopts review later is sampled from its adoption date, once at least 10 changes have followed it; earlier history is not claimed as reviewed. A review record written by a push hook with a passing verdict, naming the commit range, counts on its own when the reviewer is from a different company. The count looks for a habit of peer review, not a setup: one reviewed push shows the review exists; ten in a row show it happens every time. Until 10 changes have followed adoption, with every one reviewed, the gate is **in place**: reported with the count, not met. One pushed change without a review restarts the count at the next reviewed change, and the report names it | Did anything reach staging or production before its review? |
 | 2 | Verification on every change | Tests, linter and static analysis run on every change and a failure blocks it | — |
 | 2 | Security review before push | An AI security review (e.g. `/security-review`) or static security analysis (CodeQL, Semgrep) runs on every change before it reaches the shared branch or a pull request is opened; secret scanning configured; dependency vulnerability scan blocks on critical findings | — |
 | 2 | Development apart from production | The repository names a development and a production environment (in the rules file, the README or a note, or shown by config files), or says nothing is live yet; and the agent publishes live only after the person confirms (a rule in the rules file, or an ask or deny rule on publish commands). A testing or staging environment is recommended, not required | Does the rule cover the commands this project really publishes with? |
