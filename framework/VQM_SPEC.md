@@ -1,6 +1,6 @@
-# The Vibe Quality Model (VibeQM): specification v0.4.9
+# The Vibe Quality Model (VibeQM): specification v0.4.10
 
-Version 0.4.9, 2026-11-16. Part of the Vibe Quality Model: [vibeqm.com](https://vibeqm.com).
+Version 0.4.10, 2026-11-17. Part of the Vibe Quality Model: [vibeqm.com](https://vibeqm.com).
 
 The definition of the model: the five levels, the autonomy each one earns, the
 evidence rules and what each level requires. The assessor procedure
@@ -187,7 +187,9 @@ Nothing is required.
 - **Requirements first.** Every change starts from a written requirement or issue
   with acceptance criteria. When a requirement is ambiguous, the agent **asks the
   person clarifying questions with multiple options, the recommended option first**,
-  before writing code, and the answer is recorded.
+  before writing code, and the answer is recorded where the change can be traced to
+  it (the issue, the requirement or the commit message), saying whether the person
+  took the recommended option and, when they didn't, their reason.
 - **Peer review before merge.** Every change gets a human or an AI peer review
   (§4 rule 3). The unit is the push or the pull request, not the commit: one review
   at each push to the shared branch, or on each pull request, covers every commit
@@ -231,10 +233,24 @@ Nothing is required.
   repository (for example in Mermaid) and updated with every change that alters
   them.
 - **Decision records with options:** significant decisions record the options
-  considered, the recommendation and the choice.
+  considered, the recommendation, the choice, and whether the recommendation was
+  followed or overruled, with the person's reason when it was overruled.
+  When a decision chooses between ways to build something in a high-risk area (§5:
+  login and permissions, payments, personal data, deleting data, security settings,
+  deployment, new dependencies), its record is a **weighted decision matrix**: the criteria, a weight for each, a score for each option against each
+  criterion, the weighted totals, then the recommendation and the choice. The agent
+  drafts it; the person adjusts the weights and scores and decides. A choice against
+  the highest total is an override and says why.
 - Plan, risk register, quality plan with self-assessment, tailoring record.
 - Provenance record: which model and version wrote and which reviewer reviewed each
   change.
+- **Change trailers**: every change on the main branch carries git
+  trailers that lead back to why it was made: `Requirement:` (the requirement or
+  issue it implements), `Decision:` (the decision record that governs it, when one
+  does) and `Origin:`, one of `ai-recommended` (the person accepted the AI's
+  recommendation), `person-override` (the person chose against it, and the decision
+  record says why) or `person-request` (the person asked for it, with no
+  recommendation involved). The agent writes them; the person never has to.
 - Critical-rules table, risk-class definitions, model register, gate proof record,
   data boundary (secrets and personal data never go to an AI company).
 - **An AI budget**: a monthly or per-task limit on AI spending, where it is
@@ -256,7 +272,8 @@ Nothing is required.
   recorded in the decision records.
 - **Peer review by risk.** Standard-risk changes get a human or AI peer review;
   high-risk changes get both, plus a threat model. A review checklist is used. Risk
-  classes are audited (§5).
+  classes are audited (§5). A merge over a blocking review finding needs the owner's
+  record: the finding, the reason, and who decided.
 - **Verification and validation before every production deployment.**
   *Verification*, built right: tests, peer review, static analysis, security review.
   *Validation*, the right thing built: acceptance tests against the requirements, run
@@ -291,7 +308,8 @@ Nothing is required.
 #### Artifacts
 
 - The four VibeQM numbers (§8): escaped defects, security findings, review time with
-  review yield, churn; and the revert count as the cross-check on escaped defects.
+  review yield, churn; and the revert count as the cross-check on escaped defects; and the share of AI recommendations the person overruled, with the
+  escaped defects on each side, as the cross-check on who decides better.
 - DORA's four delivery metrics (§8): deployment frequency, lead time for
   changes, change failure rate, time to restore service. DORA renamed the last
   "failed deployment recovery time" in 2023 and added a fifth, deployment rework
@@ -404,6 +422,7 @@ From Level 4:
 | Reverts | Merged changes reverted or rolled back, per 100 merged changes; a cross-check on escaped defects | Version-control and deployment history |
 | Security findings | New findings of medium severity or higher in code on the main branch, monthly, plus the count still open | Scanners, dependency checker, human reports |
 | Review time and review yield | Median time from proposal to approval, **paired with** the share of reviews that caught something. For a solo developer: time from the AI's proposal to the owner's approval | Pull-request history, review records |
+| Recommendations overruled (cross-check) | Share of changes whose `Origin:` is `person-override`, monthly, with escaped defects per 100 changes for overruled and for accepted recommendations | Change trailers, decision records |
 | Churn | Share of added lines changed or deleted again within 30 days | Version-control history |
 | Deployment frequency (DORA) | How often the team deploys to production | Deployment pipeline |
 | Lead time for changes (DORA) | Time from a change being committed to running in production | Version control and pipeline |
@@ -421,7 +440,8 @@ merge commits left out, as in §6 Level 2. A project may tailor a definition wit
 target stops measuring what it was meant to (Goodhart's law). Read each one with its
 adversarial reading: a high review yield can mean careless first drafts rather than
 sharp reviews; low churn can mean code nobody dares to improve rather than code done
-right. A limit that has moved toward comfort since its baseline needs a recorded
+right; a share of overruled recommendations near zero can mean a person who accepts
+whatever the AI proposes rather than an AI that is always right. A limit that has moved toward comfort since its baseline needs a recorded
 reason.
 
 **Escaped defects and the outside signal are read with their cross-checks**. A falling escaped-defect count can mean a quieter issue tracker
