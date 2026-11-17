@@ -246,6 +246,8 @@ The agent keeps these from the first day, with no extra work for the person:
   template (required at Level 3).
 - An impact note on each high-risk change: what it touches, what could break, how
   to roll it back (required at Level 3 as the change request).
+- The full project plan, filled by the agent from what the project already states,
+  with the gaps asked as open questions (required at Level 3).
 - Fix commits that name the change they fix, so escaped defects can be counted
   later (a Level 4 number, §8).
 
@@ -269,7 +271,12 @@ The agent keeps these from the first day, with no extra work for the person:
   criterion, the weighted totals, then the recommendation and the choice. The agent
   drafts it; the person adjusts the weights and scores and decides. A choice against
   the highest total is an override and says why.
-- Plan, risk register, quality plan with self-assessment, tailoring record.
+- Plan, risk register, quality plan with self-assessment, tailoring record. The plan
+  covers the sections of `DOC_STANDARD.md` §3 (goal and users, scope and
+  deliverables, roles, milestones with their evidence, the main pieces of work,
+  estimates and budget, environments and releases, dependencies and constraints, top
+  risks, the quality approach, progress reporting, data, and how the plan changes),
+  not one page.
 - Provenance record: which model and version wrote and which reviewer reviewed each
   change.
 - **Change trailers**: every change on the main branch carries git

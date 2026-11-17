@@ -65,6 +65,14 @@ that is how the person gets to see the list before you write.
    requests.
    A template still holding blanks is not evidence, so the gates it serves stay open
    until they're filled.
+   The project plan (`VibeQM/plan/PROJECT_PLAN.md`) has more sections than any one
+   file answers. Fill each from what the project already states: the rules file
+   (`CLAUDE.md`, `AGENTS.md`) often holds the goal, the users, the environments, the
+   deploy steps and the constraints; the README and the build and CI files hold the
+   rest. Name the source of each answer. Put what you can't find in its Open
+   questions table and ask the person a few at a time, each with options and your
+   recommendation first; record the answers there. Never invent a date, a budget or
+   a name. At Level 2 the plan is a head start; Level 3 requires every section.
 6. Check `.github/workflows/checks.yml` runs this project's real test and lint
    commands; adjust it to them, and say so.
 7. Run the **assess** skill (or `npx --yes vibeqm-check@0.4.11`) and report which
