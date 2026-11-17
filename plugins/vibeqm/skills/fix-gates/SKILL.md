@@ -36,7 +36,13 @@ through them with the person, one gate at a time.
    npx --yes vibeqm-check@0.4.11 --json
    ```
 
-2. Take the open gates (`status` not `met`) of the **next** level only (`next` in
+2. If the repository has no `VibeQM/` folder, ask once, before any gate: "VibeQM
+   keeps its records in a `VibeQM/` folder (requirements, decisions, changes,
+   metrics, plan, tailoring) so assessments find them. Use that layout here, or keep
+   your own?" With a yes, create only the files a gate needs, from the init
+   templates; with a no, keep the person's own places and say that a tailoring
+   record will need to name them at Level 3.
+3. Take the open gates (`status` not `met`) of the **next** level only (`next` in
    the JSON). List them with their minutes, who each needs (`fix.needs`: `agent`,
    `answer`, `host` or `use`) and one line of evidence each. Recommend an order:
    gates other gates depend on first (a rules file, then checks before merge), then
@@ -45,7 +51,7 @@ through them with the person, one gate at a time.
    If the person has another repository already set up with vibeqm-check, offer to
    copy its hooks, CI workflow, agent settings and templates and rewrite only this
    repository's facts: the second repository should cost minutes, not hours.
-3. For the chosen gate:
+4. For the chosen gate:
    - say why it matters, in a sentence, from `fix.why`;
    - read the files the steps touch, so the work fits this repository as it is;
    - propose the change and wait for a yes;
@@ -58,15 +64,15 @@ through them with the person, one gate at a time.
      local or cloud: a person other than the author is a team's option;
    - confirm it the way `fix.verify` says (usually: run the tool again and read that
      gate).
-4. Report: the gate's new status with its evidence, what's left at this level and
+5. Report: the gate's new status with its evidence, what's left at this level and
    its total minutes. Then offer the next gate.
-5. Some gates need time or other people, and can't close in one session: "Checks seen
+6. Some gates need time or other people, and can't close in one session: "Checks seen
    to fail" needs a check that really blocked a change, or a planted-fault drill you
    run and record; "Peer review on every change" reads in place once review runs and
    counts after 10 reviewed changes, because it looks for a habit of peer review, not
    a setup (one unreviewed push restarts the count, and the
    hook is per clone). Set up what makes them happen, and say when the gate can close.
-6. When every fact check of the level is met, offer the **judgment** skill: the
+7. When every fact check of the level is met, offer the **judgment** skill: the
    assessor's judgment questions decide whether the evidence is real practice or only
    paperwork.
 
