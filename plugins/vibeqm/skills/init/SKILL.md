@@ -44,7 +44,7 @@ that is how the person gets to see the list before you write.
    - `.github/pull_request_template.md`, `.github/ISSUE_TEMPLATE/change-request.md`:
      the owner, the requirement and the review on every change;
    - `.gitignore`: keeps secret files out of git;
-   - `VibeQM/`: requirements, decisions, plan and tailoring records;
+   - `VibeQM/`: requirements, decisions, changes, metrics, plan and tailoring records (changes and metrics are a head start: the agent fills them as it works);
    - `vqm-proof.json`: where a person records evidence the tool can't see.
    If the repository already has a rules file under another name (`CLAUDE.md`,
    `.cursorrules`…), say so: `AGENTS.md` would be a second one, and the person may

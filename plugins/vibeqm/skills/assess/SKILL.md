@@ -76,6 +76,11 @@ runs it and explains the answer.
    - otherwise: the **fix-gates** skill closes open gates one at a time;
    - all fact checks of a level met: the **judgment** skill answers the assessor's
      judgment questions, which the tool can't.
+   If the person decides to go for a level and the repository has no `VibeQM/`
+   folder, recommend VibeQM's layout as part of that step (records in `VibeQM/`:
+   requirements, decisions, changes, metrics, plan, tailoring), so later assessments
+   find them; the init or fix-gates skill asks before creating anything. The
+   assessment itself writes nothing.
 
 The full procedure, for an assessment by two models and a person's countersignature,
 is the VibeQM assessor: <https://vibeqm.com/assessor>

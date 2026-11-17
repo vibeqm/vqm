@@ -144,6 +144,21 @@ audit fails and Level 4 self-merging is suspended.
 
 Each level requires everything in the levels below it.
 
+**Start recording: a head start, not a gate.** Levels 2 and 3 end with a
+list of records to start keeping before they are required, because a later level
+will need them, often with months of history (a Level 4 baseline can't be built in a
+day). The agent writes them as part of its normal work, without asking the person
+for anything extra: early levels put the effort on the AI, not on the person. They
+never count toward the level they are listed under, and their absence never blocks
+it. The assessor reports them as a head start ("change trailers on 34 of the last
+40 changes, since September"), and when the team reaches the level that requires
+them, the gate is already met or its baseline already exists. These records, like
+the rest, live in `VibeQM/`, the layout init creates (requirements, decisions,
+changes, metrics, plan, tailoring), so an assessment knows where to look; a project
+that keeps them elsewhere names the places in a tailoring record. An
+assessment never writes them: it reads, and if the person then decides to go for a
+level, the agent recommends the layout and asks before creating anything.
+
 **Applicability.** Some items assume a live production service: three
 environments and promotion through them, verification and validation per production
 release, runbooks, monitoring, incident response, backups, service-level objectives
@@ -220,6 +235,19 @@ Nothing is required.
   secrets.
 - Every change names a human owner.
 - At least one blocking check has been seen to fail (each one, from Level 3).
+
+#### Start recording (head start for Level 3, not gated)
+
+The agent keeps these from the first day, with no extra work for the person:
+
+- Change trailers on every commit: `Requirement:`, `Origin:`, and `Decision:` when
+  a decision governs the change (required at Level 3).
+- A weighted decision matrix for each high-risk design choice, from the decision
+  template (required at Level 3).
+- An impact note on each high-risk change: what it touches, what could break, how
+  to roll it back (required at Level 3 as the change request).
+- Fix commits that name the change they fix, so escaped defects can be counted
+  later (a Level 4 number, §8).
 
 ### Level 3 — Standardized (one enforced standard across projects)
 
@@ -302,6 +330,24 @@ Nothing is required.
   change to the agent's guardrails (rules files, hooks, CI configuration, agent
   settings) approved by a person, who is not its author when the author is a person; parallel agents on separate branches;
   a license check on new code; a lessons entry for every escaped defect.
+- **Change request with an impact analysis** for every high-risk change:
+  before writing code, the agent writes what the change touches, what could break,
+  how it will be tested and how it will be rolled back, beside the threat model; the
+  owner reads it before approving.
+- **Estimates against actuals**: before each task the agent records its
+  estimate of the time and the AI cost, and after it the actual, in the change
+  request, the pull request or a log.
+
+#### Start recording (head start for Level 4, not gated)
+
+The agent keeps these as data, so Level 4 starts with a baseline instead of
+waiting months for one:
+
+- The Level 4 numbers (§8) month by month: escaped defects, security findings,
+  review time with review yield, churn, reverts.
+- The share of recommendations overruled, from the change trailers.
+- Estimate accuracy, from the estimates and actuals.
+- A control chart for each number once there are a few months of data.
 
 ### Level 4 — Measured
 
@@ -309,7 +355,9 @@ Nothing is required.
 
 - The four VibeQM numbers (§8): escaped defects, security findings, review time with
   review yield, churn; and the revert count as the cross-check on escaped defects; and the share of AI recommendations the person overruled, with the
-  escaped defects on each side, as the cross-check on who decides better.
+  escaped defects on each side, as the cross-check on who decides better;
+  and estimate accuracy (estimated against actual time and AI cost per change) as the
+  cross-check on AI cost.
 - DORA's four delivery metrics (§8): deployment frequency, lead time for
   changes, change failure rate, time to restore service. DORA renamed the last
   "failed deployment recovery time" in 2023 and added a fifth, deployment rework
@@ -329,7 +377,10 @@ Nothing is required.
 
 #### Practices
 
-- The numbers are reviewed monthly, where the limits are set and recalibrated;
+- The numbers are reviewed monthly, each on a **control chart**: the number
+  plotted month by month against its baseline and limits, so a real shift stands out
+  from ordinary variation; the agent draws it (a Mermaid or plain-text chart in the
+  repository is enough). The review is where the limits are set and recalibrated;
   baselines restart when the model family changes, with the warm-up rule, and are
   revalidated at a version change (§7).
 - The automatic stop is checked before every self-merge and cuts off self-merging
@@ -423,6 +474,7 @@ From Level 4:
 | Security findings | New findings of medium severity or higher in code on the main branch, monthly, plus the count still open | Scanners, dependency checker, human reports |
 | Review time and review yield | Median time from proposal to approval, **paired with** the share of reviews that caught something. For a solo developer: time from the AI's proposal to the owner's approval | Pull-request history, review records |
 | Recommendations overruled (cross-check) | Share of changes whose `Origin:` is `person-override`, monthly, with escaped defects per 100 changes for overruled and for accepted recommendations | Change trailers, decision records |
+| Estimate accuracy (cross-check) | Actual against estimated time and AI cost per change, monthly; read with AI cost | Change requests, pull requests, the providers' usage pages |
 | Churn | Share of added lines changed or deleted again within 30 days | Version-control history |
 | Deployment frequency (DORA) | How often the team deploys to production | Deployment pipeline |
 | Lead time for changes (DORA) | Time from a change being committed to running in production | Version control and pipeline |
@@ -441,7 +493,7 @@ target stops measuring what it was meant to (Goodhart's law). Read each one with
 adversarial reading: a high review yield can mean careless first drafts rather than
 sharp reviews; low churn can mean code nobody dares to improve rather than code done
 right; a share of overruled recommendations near zero can mean a person who accepts
-whatever the AI proposes rather than an AI that is always right. A limit that has moved toward comfort since its baseline needs a recorded
+whatever the AI proposes rather than an AI that is always right. Estimates that always come true can mean padded estimates rather than good ones. A limit that has moved toward comfort since its baseline needs a recorded
 reason.
 
 **Escaped defects and the outside signal are read with their cross-checks**. A falling escaped-defect count can mean a quieter issue tracker

@@ -24,6 +24,8 @@ honest. The gate names are the ones `vibeqm-check` reports.
 | `VibeQM/requirements/REQUIREMENTS.md` | Requirements first | Every requirement has acceptance criteria and a way to verify it; clarifying questions and their answers are recorded |
 | `VibeQM/decisions/DECISIONS.md` | Decision log (light) | Every decision is dated and names who decided |
 | `VibeQM/plan/PROJECT_PLAN.md` | Plan (light) | Every milestone says what evidence closes it |
+| `VibeQM/changes/CHANGES.md` | Head start for Level 3 (change request with impact analysis, estimates against actuals) | Every high-risk change has a row before its code: what it touches, what could break, test, rollback, estimate; the actual when done |
+| `VibeQM/metrics/METRICS.md` | Head start for Level 4 (the numbers and their baselines) | One row a month; control charts once there are a few months of data |
 | `VibeQM/tailoring/TAILORING.md` | Version control + merge path (the solo-work exception) | Every change to the standard has a reason and an approver |
 | `vqm-proof.json` | Proof for what `vibeqm-check` can't see | Each entry is vouched for by a named person, and expires after a year |
 
