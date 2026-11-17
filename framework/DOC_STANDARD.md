@@ -83,6 +83,20 @@ A project at a level must keep the documents marked for that level and below.
 A solo developer at Level 2 can live with one page: a README, a rules file, and a
 few lines of requirements and decisions.
 
+**The plan is more than one page from Level 3.** It covers: the goal and
+the users; scope in and out, with the deliverables; roles (the owner, who approves,
+who reviews, including the AI reviewer's model); milestones, each with the evidence
+that closes it; the main pieces of work; estimates and the budget (time, AI spend,
+hosting); environments and how a release goes out; dependencies and constraints
+(outside services, data, legal); the top risks, until the risk register takes them;
+the quality approach (the checks, the review route, the VibeQM level aimed for);
+how progress is reported; the data the product holds and how it is kept; and how
+the plan itself changes. At Level 2 the template holds all of these as a head start:
+the agent fills what the project already states (the rules file, the README, the
+build and CI files), lists what it doesn't know as open questions, and asks the
+person a few at a time, with options and its recommendation first. It never invents
+a date, a budget or a name.
+
 ## 4. Tailoring
 
 A project may drop, merge, rename or extend any document, folder or template.
