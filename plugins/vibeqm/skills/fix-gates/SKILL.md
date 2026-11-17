@@ -33,7 +33,7 @@ through them with the person, one gate at a time.
 1. From the repository root, run:
 
    ```bash
-   npx --yes vibeqm-check@0.4.11 --json
+   npx --yes vibeqm-check@0.4.12 --json
    ```
 
 2. If the repository has no `VibeQM/` folder, ask once, before any gate: "VibeQM

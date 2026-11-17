@@ -3,6 +3,6 @@
   "private": true,
   "description": "Records the vibeqm-check version the VibeQM plugin's skills run (npx vibeqm-check@<version>), so the dependency scan covers it. Nothing here is built or published.",
   "devDependencies": {
-    "vibeqm-check": "0.4.11"
+    "vibeqm-check": "0.4.12"
   }
 }
