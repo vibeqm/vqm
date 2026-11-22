@@ -1,6 +1,6 @@
 ---
 name: assess
-description: Self-assess the current repository against the Vibe Quality Model (VibeQM) with vibeqm-check and explain the result in plain words - the level the evidence supports, each open gate, and what closes it. Use when the person asks for their VibeQM level, a VibeQM self-assessment, or what stands between this repository and the next level.
+description: Self-assess the current repository against the Vibe Quality Model (VibeQM) with vibeqm-check and explain the result in plain words - the level the evidence supports, each open gate, and what closes it. Use when the person asks to evaluate or assess the repository with VibeQM, for their VibeQM level, a VibeQM self-assessment, or what stands between this repository and the next level.
 ---
 
 # Assess a repository against VibeQM
