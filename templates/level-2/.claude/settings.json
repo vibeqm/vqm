@@ -25,9 +25,17 @@
       "Read(**/.env.*)",
       "Read(~/.ssh/**)",
       "Read(~/.aws/**)",
-      "Read(~/.config/gcloud/**)"
+      "Read(~/.config/gcloud/**)",
+      "Bash(*>*OVERRULED.md*)",
+      "Bash(*tee *OVERRULED.md*)",
+      "Bash(*sed *OVERRULED.md*)",
+      "Bash(*python*OVERRULED.md*)",
+      "Bash(*cp *OVERRULED.md*)",
+      "Bash(*mv *OVERRULED.md*)"
     ],
     "ask": [
+      "Write(**/reviews/push/OVERRULED.md)",
+      "Edit(**/reviews/push/OVERRULED.md)",
       "Bash(npm publish*)",
       "Bash(vercel --prod*)",
       "Bash(vercel deploy --prod*)",

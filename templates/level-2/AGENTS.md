@@ -38,6 +38,10 @@ Copilot all read AGENTS.md. -->
   bigger gets split.
 - Every push or pull request is reviewed before it lands: <by a person, or by an AI
   model from a different company than the one that wrote the change>.
+- A review that blocks is a finding, not a veto: tell me whether you think it is right
+  or a false positive, and why. Fix it, or, if I decide it is a false positive, write my
+  overrule in reviews/push/OVERRULED.md (the review, the finding, why, my words, who
+  decided). Never overrule on your own or re-ask the reviewer about the same change.
 - I own every change: commits carry my name as the author.
 
 ## Never without a person
