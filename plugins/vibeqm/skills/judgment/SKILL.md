@@ -53,7 +53,7 @@ whose facts are met, with reasons a person can check.
 | Agent rules file | Is it specific to this repository (its real commands, paths and limits), or boilerplate that would fit any project? |
 | Agent permissions | Are the limits real, or wide open? Do the ask rules cover every action this project can't undo (publishing a package, deploying, sending messages, spending money, using credentials)? |
 | Requirements first | Are the acceptance criteria testable: could someone write a test or a check from each one? |
-| Peer review on every change | Did anything reach staging or production before its review? |
+| Peer review on every change | Did anything reach staging or production before its review? For each overruled finding (`reviews/push/OVERRULED.md`): does the record show the owner decided, and does the reason hold up against the change (a misread line, not an inconvenient finding)? |
 | Development apart from production | Does the publish rule cover the commands this project really publishes with (read its scripts, Makefile, CI and package files)? |
 
 ### Level 3, Standardized

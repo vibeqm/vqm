@@ -1,6 +1,6 @@
-# The Vibe Quality Model (VibeQM): specification v0.4.10
+# The Vibe Quality Model (VibeQM): specification v0.4.11
 
-Version 0.4.10, 2026-11-17. Part of the Vibe Quality Model: [vibeqm.com](https://vibeqm.com).
+Version 0.4.11, 2026-11-23. Part of the Vibe Quality Model: [vibeqm.com](https://vibeqm.com).
 
 The definition of the model: the five levels, the autonomy each one earns, the
 evidence rules and what each level requires. The assessor procedure
@@ -125,6 +125,20 @@ is examples; the test decides.
    class sets the minimum peer review.
 5. **Traces over documents.** A document proves a standard exists; only traces
    (history, logs, defects caught) prove it is followed.
+6. **A blocking finding is not a veto**. From Level 2, a peer review that
+   blocks a change has two honest answers. If the finding is right, the change is
+   fixed. If it is a false positive (the reviewer misread the change), the owner, a
+   person, may overrule it: the record names the review, the finding, why it is a
+   false positive, the owner's decision in their own words and who decided, and it
+   stays beside the review in the repository (for example a row in
+   `reviews/push/OVERRULED.md`, or the pull request). A change that goes ahead on such
+   a record still counts as reviewed. The agent never overrules on its own: it reads
+   the finding, says whether it thinks it is right and why, and asks the owner; asking
+   the reviewer again about the same unchanged change is not an answer. To keep false
+   positives rare, the reviewer is given the context it needs (configuration files
+   whole, not only the changed lines) and writes a doubt as a question, not a block.
+   An overruled finding that later proves right is an escaped defect, and the
+   overruled share is read at Level 4.
 
 ## 5. Risk classes
 
