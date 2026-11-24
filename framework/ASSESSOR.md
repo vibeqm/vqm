@@ -1,6 +1,6 @@
 # VibeQM assessor procedure v0.4.11
 
-Version 0.4.11, 2026-11-17. Part of the Vibe Quality Model: [vibeqm.com](https://vibeqm.com).
+Version 0.4.11, 2026-11-23. Part of the Vibe Quality Model: [vibeqm.com](https://vibeqm.com).
 
 The Vibe Quality Model is assessed by AI. This file is the assessor: a procedure
 that any capable coding agent (Claude Code, Codex, Gemini CLI, Copilot agent…)

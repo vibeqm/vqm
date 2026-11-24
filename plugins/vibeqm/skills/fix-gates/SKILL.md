@@ -34,7 +34,7 @@ through them with the person, one gate at a time.
   `reviews/push/OVERRULED.md` (the review file, the finding, why it is false, their
   words, who decided) and commit it with the review record: the push then goes
   ahead and still counts as reviewed. Never overrule on your own, and never ask the
-  reviewer again about the same unchanged change until it passes.
+  reviewer again about the same unchanged change: a second asking is not a review.
 
 ## Steps
 

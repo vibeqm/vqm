@@ -1,6 +1,6 @@
 # The Vibe Quality Model (VibeQM): specification v0.4.11
 
-Version 0.4.11, 2026-11-17. Part of the Vibe Quality Model: [vibeqm.com](https://vibeqm.com).
+Version 0.4.11, 2026-11-23. Part of the Vibe Quality Model: [vibeqm.com](https://vibeqm.com).
 
 The definition of the model: the five levels, the autonomy each one earns, the
 evidence rules and what each level requires. The assessor procedure
